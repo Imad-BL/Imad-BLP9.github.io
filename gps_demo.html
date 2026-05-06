@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking GPS | Command Center Marina Car</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gps-layout { display: grid; grid-template-columns: 1fr 380px; height: 100vh; background: #000; overflow: hidden; }
+        .map-area { position: relative; background: #111 url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); overflow: hidden; }
+        .sidebar { background: #0f0f0f; border-left: 1px solid #222; padding: 2rem; display: flex; flex-direction: column; color: #fff; }
+        
+        .marker { position: absolute; color: var(--primary); font-size: 2.5rem; animation: pulse 2s infinite; filter: drop-shadow(0 0 15px var(--primary)); cursor: pointer; transition: 0.3s; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.8; } 100% { transform: scale(1); opacity: 1; } }
+        
+        .vehicle-card { background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 15px; border: 1px solid #222; margin-bottom: 1.2rem; transition: 0.3s; }
+        .vehicle-card.active { border-left: 5px solid #27c93f; background: rgba(39, 201, 63, 0.05); }
+        .vehicle-card.stopped { border-left: 5px solid #ffbd2e; background: rgba(255, 189, 46, 0.05); }
+        
+        .radar { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .radar-line { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: rgba(197, 160, 89, 0.3); animation: scan 4s linear infinite; box-shadow: 0 0 15px var(--primary); }
+        @keyframes scan { from { top: 0; } to { top: 100%; } }
+    </style>
+</head>
+<body class="gps-layout">
+    <div class="map-area">
+        <div class="radar"><div class="radar-line"></div></div>
+        <nav style="position: absolute; top: 0; left: 0; width: 100%; z-index: 100; padding: 1.5rem 2.5rem; background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);">
+            <div class="logo">MARINA CAR <span>LIVE GPS</span></div>
+        </nav>
+        
+        <i class="fas fa-car-side marker" style="top: 35%; left: 45%;"></i>
+        <i class="fas fa-car-side marker" style="top: 60%; left: 28%; color: #fff;"></i>
+        <i class="fas fa-car-side marker" style="top: 48%; left: 72%; color: #27c93f;"></i>
+
+        <div style="position: absolute; top: 6rem; left: 2.5rem; background: rgba(0,0,0,0.8); border: 1px solid var(--primary); padding: 10px 20px; border-radius: 20px; font-size: 0.7rem; color: var(--primary); font-weight: 800; letter-spacing: 1px;">
+            <i class="fas fa-satellite"></i> LIAISON SATELLITE ACTIVE
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <h3 style="margin-bottom: 2rem; color: var(--primary);">Monitorage Flotte</h3>
+        
+        <div class="vehicle-card active">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                <span style="font-weight: 900;">VW GOLF 8 (#84)</span>
+                <span style="font-size: 0.6rem; color: #27c93f; font-weight: 900;">EN ROUTE</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #888;">
+                <p><i class="fas fa-tachometer-alt"></i> 64 km/h</p>
+                <p><i class="fas fa-location-arrow"></i> Agdal, Rabat</p>
+            </div>
+        </div>
+
+        <div class="vehicle-card stopped">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                <span style="font-weight: 900;">G-CLASS (#12)</span>
+                <span style="font-size: 0.6rem; color: #ffbd2e; font-weight: 900;">ARRÊT</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #888;">
+                <p><i class="fas fa-clock"></i> Depuis 2h 15m</p>
+                <p><i class="fas fa-location-arrow"></i> Marina Rabat</p>
+            </div>
+        </div>
+
+        <div style="margin-top: auto;">
+            <button class="cta-button" style="width: 100%; background: #e74c3c; border-color: #e74c3c; color: #fff;" onclick="alert('Simulation: Coupure moteur envoyée au véhicule #84.')">Coupure Moteur Sécurité</button>
+            <p style="text-align: center; font-size: 0.6rem; color: #444; margin-top: 1.5rem;">Anti-Vol Satellite v5.0 | Marina Car Security</p>
+        </div>
+    </aside>
+
+    <script>
+        // Move markers slightly to simulate live movement
+        function moveCar(id) {
+            const markers = document.querySelectorAll('.marker');
+            markers.forEach(m => {
+                const top = parseFloat(m.style.top);
+                const left = parseFloat(m.style.left);
+                m.style.top = (top + (Math.random() * 0.2 - 0.1)) + '%';
+                m.style.left = (left + (Math.random() * 0.2 - 0.1)) + '%';
+            });
+        }
+        setInterval(moveCar, 2000);
+    </script>
+</body>
+</html>

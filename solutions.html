@@ -9,7 +9,7 @@
     <style>
         .showroom-body { background: #0a0a0a; color: #fff; padding-top: 100px; }
         .solution-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
-        .solution-card { background: var(--glass); border: 1px solid var(--glass-border); padding: 3rem 2rem; border-radius: 20px; text-align: center; transition: 0.3s; }
+        .solution-card { background: var(--glass); border: 1px solid var(--glass-border); padding: 3rem 2rem; border-radius: 20px; text-align: center; transition: 0.3s; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
         .solution-card:hover { transform: translateY(-10px); border-color: var(--primary); }
         .solution-card i { font-size: 3rem; color: var(--primary); margin-bottom: 2rem; }
         .solution-card h3 { margin-bottom: 1.5rem; }
@@ -27,30 +27,45 @@
     </nav>
 
     <div class="section-header" style="margin-top: 4rem;">
-        <h2>Démos Interactives</h2>
-        <p>Explorez chaque module de nos solutions professionnelles</p>
+        <h2>Showroom de Solutions</h2>
+        <p>Explorez nos modules professionnels en conditions réelles</p>
     </div>
 
     <div class="solution-grid">
         <div class="solution-card">
-            <i class="fas fa-credit-card"></i>
-            <h3>Paiement en Ligne</h3>
-            <p>Découvrez l'interface de réservation et de paiement sécurisée pour vos clients finaux.</p>
-            <a href="payment.html" class="cta-button">Voir la démo User</a>
+            <div>
+                <i class="fas fa-desktop"></i>
+                <h3>Pack Vitrine Luxe</h3>
+                <p>Découvrez l'interface immersive pour vos clients : showroom virtuel et expérience utilisateur premium.</p>
+            </div>
+            <a href="vitrine_demo.html" class="cta-button">Démo Vitrine</a>
         </div>
 
         <div class="solution-card">
-            <i class="fas fa-user-circle"></i>
-            <h3>Espace Client</h3>
-            <p>Simulez l'espace personnel de vos clients : historique, fidélité et gestion des documents.</p>
-            <a href="profile.html" class="cta-button">Voir la démo Client</a>
+            <div>
+                <i class="fas fa-chart-bar"></i>
+                <h3>Business Intelligence</h3>
+                <p>Analysez vos revenus, gérez vos clients et suivez votre croissance avec notre tableau de bord Admin.</p>
+            </div>
+            <a href="admin_demo.html" class="cta-button">Démo Dashboard</a>
         </div>
 
         <div class="solution-card">
-            <i class="fas fa-satellite-dish"></i>
-            <h3>Enterprise Command Center</h3>
-            <p>La solution ultime (Solution 3) combinant ERP Office et Tracking GPS Satellite en une seule interface de commande.</p>
-            <a href="erp_demo.html" class="cta-button">Voir la démo Solution 3 / GPS</a>
+            <div>
+                <i class="fas fa-file-invoice"></i>
+                <h3>Enterprise ERP</h3>
+                <p>Automatisez votre bureau : génération de contrats, gestion de flotte et comptabilité interne.</p>
+            </div>
+            <a href="erp_demo.html" class="cta-button">Démo Office ERP</a>
+        </div>
+
+        <div class="solution-card">
+            <div>
+                <i class="fas fa-satellite"></i>
+                <h3>Tracking GPS Live</h3>
+                <p>Surveillez votre flotte en temps réel par satellite. Sécurité anti-vol et coupure moteur à distance.</p>
+            </div>
+            <a href="gps_demo.html" class="cta-button">Démo Live GPS</a>
         </div>
     </div>
 
