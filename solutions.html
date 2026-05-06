@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Solutions | Démo Interactive Marina Car</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .demo-page { padding-top: 120px; }
+        .demo-section { padding: 4rem 5%; border-bottom: 1px solid var(--glass-border); }
+        .demo-window { 
+            background: #151515; 
+            border-radius: 15px; 
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            margin-top: 2rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .demo-nav { background: #222; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; }
+        .demo-grid { display: grid; grid-template-columns: 200px 1fr; height: 500px; }
+        .demo-sidebar { background: #1a1a1a; padding: 20px; border-right: 1px solid #333; }
+        .demo-main { padding: 30px; overflow-y: auto; background: #0f0f0f; }
+        .mock-card { background: var(--glass); padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid var(--glass-border); }
+        .mock-stat { font-size: 2rem; font-weight: 800; color: var(--primary); }
+        .mock-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; }
+        .mock-table { width: 100%; border-collapse: collapse; }
+        .mock-table th { text-align: left; padding: 10px; border-bottom: 1px solid #333; color: var(--text-muted); font-size: 0.8rem; }
+        .mock-table td { padding: 12px 10px; border-bottom: 1px solid #222; font-size: 0.9rem; }
+        .status-pill { padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; }
+        .status-active { background: rgba(39, 201, 63, 0.2); color: #27c93f; }
+        .status-pending { background: rgba(255, 189, 46, 0.2); color: #ffbd2e; }
+        
+        /* Map Mock */
+        .map-mock { height: 400px; background: #222 url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); position: relative; display: flex; align-items: center; justify-content: center; }
+        .map-car { position: absolute; color: var(--primary); font-size: 2rem; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
+    </style>
+</head>
+<body class="demo-page">
+    <nav>
+        <div class="logo">Marina Car</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="index.html#fleet">Retour à la Flotte</a></li>
+        </ul>
+        <a href="index.html#contact" class="cta-button" style="padding: 0.8rem 1.5rem; font-size: 0.8rem;">Demander un Devis</a>
+    </nav>
+
+    <!-- Solution 1: Admin Dashboard -->
+    <section class="demo-section">
+        <div class="section-header">
+            <h2>Exemple: Business Intelligence</h2>
+            <p>Tableau de bord pour le suivi de votre flotte et vos revenus.</p>
+        </div>
+        <div class="demo-window">
+            <div class="demo-nav">
+                <span style="font-weight: 700; color: var(--primary);">ADMIN CONSOLE v2.0</span>
+                <div style="display: flex; gap: 15px; font-size: 0.9rem;">
+                    <span><i class="fas fa-bell"></i></span>
+                    <span>Admin Profile <i class="fas fa-chevron-down"></i></span>
+                </div>
+            </div>
+            <div class="demo-grid">
+                <div class="demo-sidebar">
+                    <div style="margin-bottom: 1.5rem; color: var(--primary); font-size: 0.8rem; font-weight: 700;">MENU</div>
+                    <div style="display: flex; flex-direction: column; gap: 15px; color: var(--text-muted);">
+                        <span style="color: var(--text);"><i class="fas fa-th-large"></i> Dashboard</span>
+                        <span><i class="fas fa-car"></i> Véhicules</span>
+                        <span><i class="fas fa-calendar-check"></i> Réservations</span>
+                        <span><i class="fas fa-users"></i> Clients</span>
+                        <span><i class="fas fa-cog"></i> Paramètres</span>
+                    </div>
+                </div>
+                <div class="demo-main">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;">
+                        <div class="mock-card"><div class="mock-label">Revenus du Mois</div><div class="mock-stat">124,500 <span style="font-size: 0.8rem;">MAD</span></div></div>
+                        <div class="mock-card"><div class="mock-label">Locations Actives</div><div class="mock-stat">12</div></div>
+                        <div class="mock-card"><div class="mock-label">Taux d'Occupation</div><div class="mock-stat">85%</div></div>
+                    </div>
+                    <div class="mock-card">
+                        <div class="mock-label" style="margin-bottom: 15px;">Réservations Récentes</div>
+                        <table class="mock-table">
+                            <thead>
+                                <tr><th>CLIENT</th><th>VÉHICULE</th><th>DURÉE</th><th>STATUT</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Ahmed R.</td><td>Mercedes Classe G</td><td>3 Jours</td><td><span class="status-pill status-active">Actif</span></td></tr>
+                                <tr><td>Sarah M.</td><td>Golf 8</td><td>7 Jours</td><td><span class="status-pill status-pending">En attente</span></td></tr>
+                                <tr><td>John D.</td><td>Range Rover</td><td>2 Jours</td><td><span class="status-pill status-active">Actif</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution 2: ERP Office Automation -->
+    <section class="demo-section">
+        <div class="section-header">
+            <h2>Exemple: ERP Office Automation</h2>
+            <p>Génération automatique de contrats et gestion administrative simplifiée.</p>
+        </div>
+        <div class="demo-window">
+            <div class="demo-nav" style="background: #333;">
+                <span style="font-weight: 700;">ERP GENERATOR v1.4</span>
+            </div>
+            <div style="padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div class="mock-card">
+                    <h3 style="margin-bottom: 1rem;">Nouveau Contrat</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="height: 40px; background: #222; border-radius: 5px; padding: 10px; font-size: 0.8rem; color: #555;">Nom du client...</div>
+                        <div style="height: 40px; background: #222; border-radius: 5px; padding: 10px; font-size: 0.8rem; color: #555;">Sélection véhicule...</div>
+                        <div style="height: 100px; background: #222; border-radius: 5px; padding: 10px; font-size: 0.8rem; color: #555;">Conditions spéciales...</div>
+                        <button class="cta-button" style="padding: 0.8rem; font-size: 0.8rem;">Générer PDF Contrat</button>
+                    </div>
+                </div>
+                <div class="mock-card" style="background: #fff; color: #333;">
+                    <div style="text-align: center; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;">
+                        <h4 style="margin:0;">CONTRAT DE LOCATION</h4>
+                        <span style="font-size: 0.6rem;">MARINA CAR RABAT</span>
+                    </div>
+                    <div style="font-size: 0.6rem; line-height: 1.4;">
+                        <p><strong>Locataire:</strong> ............................................</p>
+                        <p><strong>Véhicule:</strong> ...........................................</p>
+                        <p><strong>Période:</strong> Du ../../2026 Au ../../2026</p>
+                        <div style="margin-top: 20px; height: 40px; border: 1px dashed #ccc;"></div>
+                        <p style="text-align: right; margin-top: 10px;">Signature: ____________</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution 3: Tracking GPS -->
+    <section class="demo-section">
+        <div class="section-header">
+            <h2>Exemple: Module Tracking GPS</h2>
+            <p>Suivi en temps réel de votre flotte sur carte interactive.</p>
+        </div>
+        <div class="demo-window">
+            <div class="map-mock">
+                <i class="fas fa-car map-car" style="top: 30%; left: 40%;"></i>
+                <i class="fas fa-car map-car" style="top: 60%; left: 20%; color: #fff;"></i>
+                <i class="fas fa-car map-car" style="top: 45%; left: 70%; color: #27c93f;"></i>
+                <div style="position: absolute; bottom: 20px; right: 20px; background: var(--bg); padding: 15px; border-radius: 10px; border: 1px solid var(--primary); font-size: 0.8rem;">
+                    <div style="margin-bottom: 5px;"><i class="fas fa-circle" style="color: #27c93f;"></i> Véhicule #84 (Golf 8) - En mouvement</div>
+                    <div style="margin-bottom: 5px;"><i class="fas fa-circle" style="color: #ff5f56;"></i> Véhicule #12 (Range Rover) - Arrêté</div>
+                    <div><i class="fas fa-circle" style="color: var(--primary);"></i> Véhicule #03 (Classe G) - Maintenance</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">Marina Car</div>
+        <p class="copyright">&copy; 2026 Marina Car Rabat. Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
