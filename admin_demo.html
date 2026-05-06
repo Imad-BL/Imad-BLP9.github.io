@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Intelligence | Dashboard Admin Marina Car</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .admin-layout { display: grid; grid-template-columns: 280px 1fr; height: 100vh; background: #080808; color: #fff; overflow: hidden; }
+        .admin-sidebar { background: #111; border-right: 1px solid #222; padding: 2rem; display: flex; flex-direction: column; }
+        .admin-main { padding: 2.5rem; overflow-y: auto; }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
+        .stat-box { background: #1a1a1a; padding: 1.5rem; border-radius: 15px; border: 1px solid #252525; }
+        .stat-box h4 { font-size: 0.75rem; color: #777; text-transform: uppercase; margin-bottom: 1rem; }
+        .stat-box .val { font-size: 1.8rem; font-weight: 900; color: var(--primary); }
+        
+        .chart-mock { height: 250px; background: #151515; border-radius: 15px; border: 1px solid #252525; position: relative; padding: 2rem; }
+        .chart-bar-container { display: flex; align-items: flex-end; justify-content: space-between; height: 100%; gap: 10px; }
+        .bar { width: 30px; background: var(--primary); border-radius: 5px 5px 0 0; position: relative; }
+        .bar:hover { background: #fff; }
+        .bar::after { content: attr(data-val); position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: var(--primary); }
+        
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+        .admin-table th { text-align: left; padding: 1rem; border-bottom: 1px solid #333; color: #555; font-size: 0.8rem; }
+        .admin-table td { padding: 1.2rem 1rem; border-bottom: 1px solid #222; font-size: 0.9rem; }
+    </style>
+</head>
+<body class="admin-layout">
+    <aside class="admin-sidebar">
+        <div style="font-weight: 900; font-size: 1.4rem; color: var(--primary); margin-bottom: 4rem; text-align: center;">BI DASHBOARD</div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="background: rgba(197, 160, 89, 0.1); color: var(--primary); padding: 1rem; border-radius: 10px; cursor: pointer;"><i class="fas fa-chart-pie"></i> Vue d'ensemble</div>
+            <div style="padding: 1rem; color: #666;"><i class="fas fa-users"></i> CRM Clients</div>
+            <div style="padding: 1rem; color: #666;"><i class="fas fa-file-invoice-dollar"></i> Rapports de Vente</div>
+            <div style="padding: 1rem; color: #666;"><i class="fas fa-bullhorn"></i> Marketing Ads</div>
+            <div style="padding: 1rem; color: #666;"><i class="fas fa-cog"></i> Paramètres API</div>
+        </div>
+        <div style="margin-top: auto; text-align: center; font-size: 0.7rem; color: #444;">Marina Car BI v4.2</div>
+    </aside>
+
+    <main class="admin-main">
+        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+            <h2>Business Intelligence <span>Console</span></h2>
+            <div style="background: #222; padding: 10px 20px; border-radius: 30px; font-size: 0.8rem;">Période: Mai 2026 <i class="fas fa-chevron-down"></i></div>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="stat-box"><h4>Revenus Totaux</h4><div class="val">428,500 <span style="font-size:0.8rem;">DH</span></div><p style="color:#27c93f; font-size:0.7rem; margin-top:5px;">+14.2% vs Avril</p></div>
+            <div class="stat-box"><h4>Réservations</h4><div class="val">84</div><p style="color:#27c93f; font-size:0.7rem; margin-top:5px;">+28 nouvelles</p></div>
+            <div class="stat-box"><h4>Panier Moyen</h4><div class="val">5,100 <span style="font-size:0.8rem;">DH</span></div><p style="color:#ffbd2e; font-size:0.7rem; margin-top:5px;">Stable</p></div>
+            <div class="stat-box"><h4>Taux Reconversion</h4><div class="val">68%</div><p style="color:#27c93f; font-size:0.7rem; margin-top:5px;">+5% vs Mars</p></div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem;">
+            <div class="chart-mock">
+                <h4 style="margin-bottom: 2rem;">Courbe de croissance mensuelle</h4>
+                <div class="chart-bar-container">
+                    <div class="bar" style="height: 40%;" data-val="Jan"></div>
+                    <div class="bar" style="height: 55%;" data-val="Feb"></div>
+                    <div class="bar" style="height: 45%;" data-val="Mar"></div>
+                    <div class="bar" style="height: 70%;" data-val="Apr"></div>
+                    <div class="bar" style="height: 90%;" data-val="May"></div>
+                    <div class="bar" style="height: 65%;" data-val="Jun"></div>
+                </div>
+            </div>
+            <div class="stat-box">
+                <h4 style="margin-bottom: 1.5rem;">Canaux d'Acquisition</h4>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <div><div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Google Search</span><span>45%</span></div><div style="width:100%; height:5px; background:#222; border-radius:5px; margin-top:5px;"><div style="width:45%; height:100%; background:var(--primary);"></div></div></div>
+                    <div><div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Instagram Ads</span><span>35%</span></div><div style="width:100%; height:5px; background:#222; border-radius:5px; margin-top:5px;"><div style="width:35%; height:100%; background:var(--primary);"></div></div></div>
+                    <div><div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Direct / Referral</span><span>20%</span></div><div style="width:100%; height:5px; background:#222; border-radius:5px; margin-top:5px;"><div style="width:20%; height:100%; background:var(--primary);"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 4rem;">Dernières Ventes Premium</h3>
+        <table class="admin-table">
+            <thead>
+                <tr><th>CLIENT</th><th>CATÉGORIE</th><th>PRIX</th><th>SOURCE</th><th>ACTION</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Mehdi Alami</td><td>Luxe (G-Class)</td><td>12,500 DH</td><td>Mobile App</td><td><button style="color:var(--primary); background:none; border:none; font-weight:800;">Détails</button></td></tr>
+                <tr><td>Fatima Zahra</td><td>SUV Premium</td><td>4,500 DH</td><td>Web Desktop</td><td><button style="color:var(--primary); background:none; border:none; font-weight:800;">Détails</button></td></tr>
+                <tr><td>Youssef K.</td><td>Berline Luxe</td><td>8,400 DH</td><td>Google Ads</td><td><button style="color:var(--primary); background:none; border:none; font-weight:800;">Détails</button></td></tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
