@@ -162,6 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Dashboard Demo Logic
     window.openDashboardDemo = () => {
-        alert("Solution Enterprise ERP: Développée par notre équipe d'Ingénieurs et Designers. Elle automatise vos contrats, gère votre flotte en temps réel et intègre vos paiements sécurisés. Contactez-nous pour une démonstration complète.");
+        alert("Solution Enterprise ERP & Tracking GPS: Gérez votre flotte en temps réel avec une précision satellite. Automatisation complète des contrats et suivi live des véhicules pour une sécurité maximale.");
     };
 });
