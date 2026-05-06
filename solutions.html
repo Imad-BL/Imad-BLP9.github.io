@@ -7,47 +7,16 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .demo-page { padding-top: 100px; background: #050505; }
-        .demo-section { padding: 6rem 5%; border-bottom: 1px solid var(--glass-border); }
-        .demo-container { max-width: 1200px; margin: 0 auto; }
-        
-        /* Device Mockup Base */
-        .device-mockup { 
-            background: #111; 
-            border: 8px solid #222; 
-            border-radius: 30px; 
-            overflow: hidden; 
-            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
-            position: relative;
-        }
-        
-        /* Payment Demo */
-        .payment-screen { padding: 2rem; background: #fff; color: #333; height: 500px; overflow-y: auto; }
-        .payment-header { border-bottom: 2px solid var(--primary); padding-bottom: 1rem; margin-bottom: 2rem; }
-        .payment-method { border: 1px solid #ddd; padding: 1rem; border-radius: 10px; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; cursor: pointer; }
-        .payment-method.active { border-color: var(--primary); background: rgba(197, 160, 89, 0.05); }
-        
-        /* User Profile Demo */
-        .user-screen { background: #0a0a0a; color: #fff; height: 500px; display: grid; grid-template-columns: 250px 1fr; }
-        .user-sidebar { background: #151515; padding: 2rem; border-right: 1px solid #222; }
-        .user-content { padding: 2rem; }
-        .rental-card { background: #1a1a1a; padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem; border-left: 4px solid var(--primary); }
-
-        /* ERP Office App */
-        .erp-screen { background: #f4f7f6; color: #333; height: 600px; display: flex; flex-direction: column; }
-        .erp-header { background: #2c3e50; color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; }
-        .erp-body { flex: 1; display: grid; grid-template-columns: 200px 1fr; }
-        .erp-menu { background: #34495e; color: #fff; padding: 1rem; }
-        .erp-main { padding: 2rem; background: #ecf0f1; }
-        .erp-tab { padding: 0.8rem; border-radius: 5px; margin-bottom: 5px; cursor: pointer; font-size: 0.9rem; }
-        .erp-tab.active { background: #2980b9; }
-
-        /* General Mock Classes */
-        .btn-pay { background: #27c93f; color: #fff; padding: 1rem; border: none; border-radius: 5px; width: 100%; font-weight: 700; cursor: pointer; }
-        .input-mock { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; }
+        .showroom-body { background: #0a0a0a; color: #fff; padding-top: 100px; }
+        .solution-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
+        .solution-card { background: var(--glass); border: 1px solid var(--glass-border); padding: 3rem 2rem; border-radius: 20px; text-align: center; transition: 0.3s; }
+        .solution-card:hover { transform: translateY(-10px); border-color: var(--primary); }
+        .solution-card i { font-size: 3rem; color: var(--primary); margin-bottom: 2rem; }
+        .solution-card h3 { margin-bottom: 1.5rem; }
+        .solution-card p { color: #888; font-size: 0.9rem; margin-bottom: 2rem; line-height: 1.6; }
     </style>
 </head>
-<body class="demo-page">
+<body class="showroom-body">
     <nav>
         <div class="logo">Marina Car</div>
         <ul class="nav-links">
@@ -57,184 +26,44 @@
         <a href="index.html#contact" class="cta-button">Prendre RDV</a>
     </nav>
 
-    <!-- 1. USER EXPERIENCE: ONLINE PAYMENT -->
-    <section class="demo-section">
-        <div class="demo-container">
-            <div class="section-header">
-                <h2>Solution: Paiement en Ligne (User side)</h2>
-                <p>Comment vos clients réservent et payent directement sur votre site.</p>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 400px; gap: 4rem; align-items: center;">
-                <div>
-                    <h3>Expérience de Réservation Fluide</h3>
-                    <p>Vos clients sélectionnent leurs dates, ajoutent des options (assurance, siège bébé) et payent via CMI ou Stripe en quelques secondes.</p>
-                    <ul style="margin-top: 2rem; list-style: none;">
-                        <li style="margin-bottom: 1rem;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Calcul automatique du prix total</li>
-                        <li style="margin-bottom: 1rem;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Validation instantanée par carte</li>
-                        <li style="margin-bottom: 1rem;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Envoi automatique de la facture par email</li>
-                    </ul>
-                </div>
-                <div class="device-mockup">
-                    <div class="payment-screen">
-                        <div class="payment-header">
-                            <h4 style="margin:0;">Finaliser la Réservation</h4>
-                            <span style="font-size: 0.8rem; color: #888;">Mercedes Classe G - 3 Jours</span>
-                        </div>
-                        <div style="margin-bottom: 1.5rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span>Total à payer</span>
-                                <span style="font-weight: 900;">4,500 MAD</span>
-                            </div>
-                        </div>
-                        <label style="font-size: 0.8rem; font-weight: 700;">Moyen de Paiement</label>
-                        <div class="payment-method active">
-                            <i class="fas fa-credit-card"></i>
-                            <span>Carte Bancaire (CMI)</span>
-                        </div>
-                        <div class="payment-method">
-                            <i class="fab fa-cc-stripe" style="color: #6772e5;"></i>
-                            <span>Stripe / Apple Pay</span>
-                        </div>
-                        <input type="text" class="input-mock" placeholder="Numéro de carte">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                            <input type="text" class="input-mock" placeholder="MM/YY">
-                            <input type="text" class="input-mock" placeholder="CVC">
-                        </div>
-                        <button class="btn-pay" onclick="alert('Paiement simulé avec succès !')">Confirmer le Paiement</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="section-header" style="margin-top: 4rem;">
+        <h2>Démos Interactives</h2>
+        <p>Explorez chaque module de nos solutions professionnelles</p>
+    </div>
 
-    <!-- 2. USER EXPERIENCE: ACCOUNTS & HISTORY -->
-    <section class="demo-section" style="background: #080808;">
-        <div class="demo-container">
-            <div class="section-header">
-                <h2>Solution: Espace Client & Fidélité</h2>
-                <p>Donnez à vos clients un espace pour gérer leurs réservations.</p>
-            </div>
-            <div class="device-mockup" style="border-radius: 15px;">
-                <div class="user-screen">
-                    <div class="user-sidebar">
-                        <div style="text-align: center; margin-bottom: 2rem;">
-                            <div style="width: 60px; height: 60px; background: var(--primary); border-radius: 50%; margin: 0 auto 10px;"></div>
-                            <span style="font-weight: 700;">Salma Bennani</span>
-                        </div>
-                        <div style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.9rem;">
-                            <span style="color: var(--primary);"><i class="fas fa-history"></i> Mes Locations</span>
-                            <span><i class="fas fa-heart"></i> Mes Favoris</span>
-                            <span><i class="fas fa-user-edit"></i> Profil</span>
-                            <span><i class="fas fa-sign-out-alt"></i> Déconnexion</span>
-                        </div>
-                    </div>
-                    <div class="user-content">
-                        <h3>Historique des Locations</h3>
-                        <div class="rental-card">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                                <span style="font-weight: 700;">Range Rover Evoque</span>
-                                <span class="status-pill status-active">Terminé</span>
-                            </div>
-                            <div style="font-size: 0.8rem; color: #888;">
-                                <p><i class="fas fa-calendar"></i> 12/04 au 15/04/2026</p>
-                                <p><i class="fas fa-money-bill"></i> Total: 3,200 MAD</p>
-                            </div>
-                            <button style="margin-top: 1rem; background: transparent; border: 1px solid #444; color: #fff; padding: 5px 10px; border-radius: 5px; font-size: 0.7rem;">Télécharger Facture</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="solution-grid">
+        <div class="solution-card">
+            <i class="fas fa-credit-card"></i>
+            <h3>Paiement en Ligne</h3>
+            <p>Découvrez l'interface de réservation et de paiement sécurisée pour vos clients finaux.</p>
+            <a href="payment.html" class="cta-button">Voir la démo User</a>
         </div>
-    </section>
 
-    <!-- 3. OFFICE APP: INTERNAL ERP -->
-    <section class="demo-section">
-        <div class="demo-container">
-            <div class="section-header">
-                <h2>Solution: WebApp Office (Gestion Interne)</h2>
-                <p>L'outil ultime pour automatiser le travail de vos agents au bureau.</p>
-            </div>
-            <div class="device-mockup">
-                <div class="erp-screen">
-                    <div class="erp-header">
-                        <span><i class="fas fa-building"></i> MARINA CAR - BACK OFFICE</span>
-                        <span>Agent: Walid F. <i class="fas fa-power-off"></i></span>
-                    </div>
-                    <div class="erp-body">
-                        <div class="erp-menu">
-                            <div class="erp-tab active"><i class="fas fa-file-contract"></i> Contrats</div>
-                            <div class="erp-tab"><i class="fas fa-car-side"></i> Flotte Auto</div>
-                            <div class="erp-tab"><i class="fas fa-tools"></i> Maintenance</div>
-                            <div class="erp-tab"><i class="fas fa-wallet"></i> Caisse/Dépenses</div>
-                        </div>
-                        <div class="erp-main">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                                <h3 style="margin:0;">Gestion des Contrats</h3>
-                                <button class="cta-button" style="padding: 0.5rem 1rem; font-size: 0.8rem;">+ Nouveau Contrat</button>
-                            </div>
-                            <div style="background: #fff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                                <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
-                                    <tr style="border-bottom: 2px solid #eee;">
-                                        <th style="padding: 10px; text-align: left;">CLIENT</th>
-                                        <th style="padding: 10px; text-align: left;">AUTO</th>
-                                        <th style="padding: 10px; text-align: left;">RETOUR PRÉVU</th>
-                                        <th style="padding: 10px; text-align: left;">ACTION</th>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 15px 10px;">Karim Tazi</td>
-                                        <td style="padding: 15px 10px;">G-Class</td>
-                                        <td style="padding: 15px 10px;">Demain 10h</td>
-                                        <td style="padding: 15px 10px;"><button style="color: #2980b9; border: none; background: none; font-weight: 700;">Prolonger</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 15px 10px;">Meryem L.</td>
-                                        <td style="padding: 15px 10px;">Peugeot 3008</td>
-                                        <td style="padding: 15px 10px;">08/05/2026</td>
-                                        <td style="padding: 15px 10px;"><button style="color: #2980b9; border: none; background: none; font-weight: 700;">Prolonger</button></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="solution-card">
+            <i class="fas fa-user-circle"></i>
+            <h3>Espace Client</h3>
+            <p>Simulez l'espace personnel de vos clients : historique, fidélité et gestion des documents.</p>
+            <a href="profile.html" class="cta-button">Voir la démo Client</a>
         </div>
-    </section>
 
-    <!-- 4. TRACKING GPS LIVE -->
-    <section class="demo-section" id="tracking" style="background: #000;">
-        <div class="demo-container">
-            <div class="section-header">
-                <h2>Solution: Tracking GPS Satellite</h2>
-                <p>Suivez vos véhicules en temps réel pour une sécurité totale.</p>
-            </div>
-            <div class="device-mockup" style="height: 500px; background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); position: relative; display: flex; align-items: center; justify-content: center;">
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;" id="gps-view">
-                    <i class="fas fa-car" style="color: var(--primary); font-size: 2rem; position: absolute; top: 40%; left: 30%; animation: pulse 2s infinite;"></i>
-                    <i class="fas fa-car" style="color: #fff; font-size: 2rem; position: absolute; top: 60%; left: 70%; animation: pulse 2.5s infinite;"></i>
-                    <div style="position: absolute; bottom: 30px; left: 30px; background: rgba(0,0,0,0.8); padding: 1.5rem; border-radius: 15px; border: 1px solid var(--primary); font-size: 0.8rem;">
-                        <h4 style="margin-bottom: 0.5rem;">STATUT FLOTTE LIVE</h4>
-                        <p><i class="fas fa-circle" style="color: #27c93f;"></i> Mercedes G - Vitesse: 65 km/h</p>
-                        <p><i class="fas fa-circle" style="color: #ff5f56;"></i> Range Rover - Arrêt prolongé</p>
-                    </div>
-                </div>
-            </div>
+        <div class="solution-card">
+            <i class="fas fa-desktop"></i>
+            <h3>Office Management</h3>
+            <p>L'interface interne pour vos agents de bureau : contrats auto, gestion de flotte et caisse.</p>
+            <a href="office.html" class="cta-button">Voir la démo Staff</a>
         </div>
-    </section>
+
+        <div class="solution-card">
+            <i class="fas fa-map-marked-alt"></i>
+            <h3>Tracking Live</h3>
+            <p>Le système de surveillance satellite pour l'administrateur. Suivez vos voitures en temps réel.</p>
+            <a href="tracking.html" class="cta-button">Voir la démo Admin</a>
+        </div>
+    </div>
 
     <footer style="padding: 4rem 5%; text-align: center;">
         <div class="footer-logo">Marina Car</div>
-        <p style="margin-top: 1rem; color: #888;">&copy; 2026 Marina Car Rabat. Solutions de prestige pour agences de location.</p>
+        <p style="margin-top: 1rem; color: #888;">&copy; 2026 Marina Car Rabat. Expertise Engineering & Design.</p>
     </footer>
-
-    <script>
-        // Simpler animations for demo
-        setInterval(() => {
-            const cars = document.querySelectorAll('.fas.fa-car');
-            cars.forEach(car => {
-                car.style.transform = `translate(${Math.random() * 5}px, ${Math.random() * 5}px)`;
-            });
-        }, 1000);
-    </script>
 </body>
 </html>
