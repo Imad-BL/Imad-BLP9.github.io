@@ -162,6 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Dashboard Demo Logic
     window.openDashboardDemo = () => {
-        alert("Démo du Tableau de Bord Admin: Cette fonctionnalité permet de gérer les contrats, le planning et les revenus en temps réel. Disponible dans le pack Business + Admin.");
+        alert("Solution Enterprise ERP: Développée par notre équipe d'Ingénieurs et Designers. Elle automatise vos contrats, gère votre flotte en temps réel et intègre vos paiements sécurisés. Contactez-nous pour une démonstration complète.");
     };
 });
