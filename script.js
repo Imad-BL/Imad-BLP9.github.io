@@ -159,4 +159,9 @@ document.addEventListener('DOMContentLoaded', () => {
             behavior: 'smooth'
         });
     });
+
+    // Dashboard Demo Logic
+    window.openDashboardDemo = () => {
+        alert("Démo du Tableau de Bord Admin: Cette fonctionnalité permet de gérer les contrats, le planning et les revenus en temps réel. Disponible dans le pack Business + Admin.");
+    };
 });
