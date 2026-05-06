@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marina Car | Location de Voitures de Luxe à Rabat</title>
     <meta name="description" content="Découvrez notre flotte exclusive de voitures de luxe à Rabat. Marina Car vous propose une expérience de location premium.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -24,7 +26,7 @@
     <section class="hero" id="home">
         <div class="hero-content animate">
             <span class="luxe-tag" style="margin-bottom: 1.5rem; display: inline-block; letter-spacing: 4px; font-weight: 800; color: var(--primary);">SUITE DE SOLUTIONS 2026</span>
-            <h1>L'Excellence en <span>Mouvement</span></h1>
+            <h1>L'Excellence en <span id="typeText">Mouvement</span></h1>
             <p>Découvrez la fusion parfaite entre ingénierie de pointe et luxe automobile. Marina Car redéfinit les standards de la location premium à Rabat.</p>
             <div class="stagger-container" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 3rem;">
                 <a href="#fleet" class="cta-button">Découvrir la Flotte <i class="fas fa-chevron-right"></i></a>
@@ -32,6 +34,28 @@
             </div>
         </div>
     </section>
+
+    <!-- STATS STRIP -->
+    <div class="stats-strip" style="background:#0a0a0a;border-top:1px solid rgba(212,175,55,0.15);border-bottom:1px solid rgba(212,175,55,0.15);padding:3rem 5%;">
+        <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;">
+            <div class="stat-item animate">
+                <div style="font-size:2.5rem;font-weight:900;color:var(--primary);" data-count="130" data-suffix="+">0</div>
+                <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);letter-spacing:3px;text-transform:uppercase;margin-top:0.5rem;">Véhicules Flotte</div>
+            </div>
+            <div class="stat-item animate">
+                <div style="font-size:2.5rem;font-weight:900;color:var(--primary);" data-count="5" data-suffix=" Modules">0</div>
+                <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);letter-spacing:3px;text-transform:uppercase;margin-top:0.5rem;">Solutions Digitales</div>
+            </div>
+            <div class="stat-item animate">
+                <div style="font-size:2.5rem;font-weight:900;color:var(--primary);" data-count="100" data-suffix="%">0</div>
+                <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);letter-spacing:3px;text-transform:uppercase;margin-top:0.5rem;">Sur Mesure</div>
+            </div>
+            <div class="stat-item animate">
+                <div style="font-size:2.5rem;font-weight:900;color:var(--primary);" data-count="24" data-suffix="/7">0</div>
+                <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);letter-spacing:3px;text-transform:uppercase;margin-top:0.5rem;">Support Technique</div>
+            </div>
+        </div>
+    </div>
 
     <section class="fleet" id="fleet">
         <div class="section-header animate">
