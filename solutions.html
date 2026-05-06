@@ -16,9 +16,10 @@
             overflow: hidden;
             margin-top: 2rem;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
         }
         .demo-nav { background: #222; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; }
-        .demo-grid { display: grid; grid-template-columns: 200px 1fr; height: 500px; }
+        .demo-grid { display: grid; grid-template-columns: 200px 1fr; height: 550px; }
         .demo-sidebar { background: #1a1a1a; padding: 20px; border-right: 1px solid #333; }
         .demo-main { padding: 30px; overflow-y: auto; background: #0f0f0f; }
         .mock-card { background: var(--glass); padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid var(--glass-border); }
@@ -32,9 +33,18 @@
         .status-pending { background: rgba(255, 189, 46, 0.2); color: #ffbd2e; }
         
         /* Map Mock */
-        .map-mock { height: 400px; background: #222 url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); position: relative; display: flex; align-items: center; justify-content: center; }
-        .map-car { position: absolute; color: var(--primary); font-size: 2rem; animation: pulse 2s infinite; }
+        .map-mock { height: 500px; background: #222 url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .map-car { position: absolute; color: var(--primary); font-size: 2rem; transition: all 1s ease; opacity: 0; }
+        .map-car.active { opacity: 1; animation: pulse 2s infinite; }
+        .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 10; transition: 0.5s; }
+        .map-overlay.hidden { opacity: 0; pointer-events: none; }
+
         @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
+
+        /* Login Mock */
+        .login-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0a; z-index: 100; display: flex; align-items: center; justify-content: center; transition: 0.5s; }
+        .login-card { background: #1a1a1a; padding: 3rem; border-radius: 15px; border: 1px solid var(--primary); text-align: center; width: 350px; }
+        .login-card.hidden { opacity: 0; pointer-events: none; transform: scale(0.9); }
     </style>
 </head>
 <body class="demo-page">
@@ -42,18 +52,48 @@
         <div class="logo">Marina Car</div>
         <ul class="nav-links">
             <li><a href="index.html">Accueil</a></li>
-            <li><a href="index.html#fleet">Retour à la Flotte</a></li>
+            <li><a href="index.html#pricing">Tarifs</a></li>
         </ul>
         <a href="index.html#contact" class="cta-button" style="padding: 0.8rem 1.5rem; font-size: 0.8rem;">Demander un Devis</a>
     </nav>
 
-    <!-- Solution 1: Admin Dashboard -->
+    <!-- Solution 0: Vitrine Luxe Gallery -->
     <section class="demo-section">
         <div class="section-header">
-            <h2>Exemple: Business Intelligence</h2>
-            <p>Tableau de bord pour le suivi de votre flotte et vos revenus.</p>
+            <h2>Démonstration: Pack Vitrine Luxe</h2>
+            <p>Un design immersif pour mettre en valeur votre flotte d'exception.</p>
+        </div>
+        <div class="demo-window" style="height: 500px; display: flex; align-items: center; justify-content: center; background: url('assets/cars/mercedes/classe-g/main.png') center/cover;">
+            <div style="background: rgba(0,0,0,0.6); padding: 3rem; border-radius: 20px; text-align: center; backdrop-filter: blur(10px); border: 1px solid var(--glass-border);">
+                <h3 style="font-size: 2.5rem; margin-bottom: 1rem;">L'Expérience <span>Immersive</span></h3>
+                <p style="margin-bottom: 2rem;">Animations fluides, photos haute résolution et navigation intuitive.</p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 10px;"></div>
+                    <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 10px;"></div>
+                    <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 10px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution 1: Admin Dashboard -->
+    <section class="demo-section" id="admin">
+        <div class="section-header">
+            <h2>Démonstration: Business Intelligence (Admin)</h2>
+            <p>Gérez vos clients et vos revenus en toute simplicité.</p>
         </div>
         <div class="demo-window">
+            <!-- Login Mock -->
+            <div class="login-overlay" id="adminLogin">
+                <div class="login-card">
+                    <i class="fas fa-user-shield" style="font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
+                    <h3 style="margin-bottom: 1.5rem;">Accès Administrateur</h3>
+                    <input type="text" value="admin@marinacar.ma" readonly style="width: 100%; padding: 12px; background: #222; border: 1px solid #333; color: #888; border-radius: 5px; margin-bottom: 10px;">
+                    <input type="password" value="********" readonly style="width: 100%; padding: 12px; background: #222; border: 1px solid #333; color: #888; border-radius: 5px; margin-bottom: 20px;">
+                    <button class="cta-button" style="width: 100%;" onclick="unlockAdmin()">Se Connecter (Démo)</button>
+                </div>
+            </div>
+
             <div class="demo-nav">
                 <span style="font-weight: 700; color: var(--primary);">ADMIN CONSOLE v2.0</span>
                 <div style="display: flex; gap: 15px; font-size: 0.9rem;">
@@ -69,25 +109,25 @@
                         <span><i class="fas fa-car"></i> Véhicules</span>
                         <span><i class="fas fa-calendar-check"></i> Réservations</span>
                         <span><i class="fas fa-users"></i> Clients</span>
-                        <span><i class="fas fa-cog"></i> Paramètres</span>
+                        <span><i class="fas fa-chart-bar"></i> Finances</span>
                     </div>
                 </div>
                 <div class="demo-main">
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;">
                         <div class="mock-card"><div class="mock-label">Revenus du Mois</div><div class="mock-stat">124,500 <span style="font-size: 0.8rem;">MAD</span></div></div>
                         <div class="mock-card"><div class="mock-label">Locations Actives</div><div class="mock-stat">12</div></div>
-                        <div class="mock-card"><div class="mock-label">Taux d'Occupation</div><div class="mock-stat">85%</div></div>
+                        <div class="mock-card"><div class="mock-label">Nouveaux Clients</div><div class="mock-stat">45</div></div>
                     </div>
                     <div class="mock-card">
-                        <div class="mock-label" style="margin-bottom: 15px;">Réservations Récentes</div>
+                        <div class="mock-label" style="margin-bottom: 15px;">Dernières Transactions</div>
                         <table class="mock-table">
                             <thead>
-                                <tr><th>CLIENT</th><th>VÉHICULE</th><th>DURÉE</th><th>STATUT</th></tr>
+                                <tr><th>CLIENT</th><th>VÉHICULE</th><th>DATE</th><th>STATUT</th></tr>
                             </thead>
                             <tbody>
-                                <tr><td>Ahmed R.</td><td>Mercedes Classe G</td><td>3 Jours</td><td><span class="status-pill status-active">Actif</span></td></tr>
-                                <tr><td>Sarah M.</td><td>Golf 8</td><td>7 Jours</td><td><span class="status-pill status-pending">En attente</span></td></tr>
-                                <tr><td>John D.</td><td>Range Rover</td><td>2 Jours</td><td><span class="status-pill status-active">Actif</span></td></tr>
+                                <tr><td>Ahmed R.</td><td>Mercedes Classe G</td><td>Aujourd'hui</td><td><span class="status-pill status-active">Payé</span></td></tr>
+                                <tr><td>Sarah M.</td><td>Golf 8</td><td>Hier</td><td><span class="status-pill status-pending">En attente</span></td></tr>
+                                <tr><td>John D.</td><td>Range Rover</td><td>04 Mai</td><td><span class="status-pill status-active">Payé</span></td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -97,36 +137,37 @@
     </section>
 
     <!-- Solution 2: ERP Office Automation -->
-    <section class="demo-section">
+    <section class="demo-section" id="erp">
         <div class="section-header">
-            <h2>Exemple: ERP Office Automation</h2>
-            <p>Génération automatique de contrats et gestion administrative simplifiée.</p>
+            <h2>Démonstration: ERP Office Automation</h2>
+            <p>Génération de contrats et WebApp pour votre équipe de bureau.</p>
         </div>
         <div class="demo-window">
             <div class="demo-nav" style="background: #333;">
-                <span style="font-weight: 700;">ERP GENERATOR v1.4</span>
+                <span style="font-weight: 700;">OFFICE ERP v1.4</span>
             </div>
             <div style="padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
                 <div class="mock-card">
-                    <h3 style="margin-bottom: 1rem;">Nouveau Contrat</h3>
+                    <h3 style="margin-bottom: 1rem;">Générateur de Contrat</h3>
                     <div style="display: flex; flex-direction: column; gap: 10px;">
-                        <div style="height: 40px; background: #222; border-radius: 5px; padding: 10px; font-size: 0.8rem; color: #555;">Nom du client...</div>
-                        <div style="height: 40px; background: #222; border-radius: 5px; padding: 10px; font-size: 0.8rem; color: #555;">Sélection véhicule...</div>
-                        <div style="height: 100px; background: #222; border-radius: 5px; padding: 10px; font-size: 0.8rem; color: #555;">Conditions spéciales...</div>
-                        <button class="cta-button" style="padding: 0.8rem; font-size: 0.8rem;">Générer PDF Contrat</button>
+                        <div style="height: 40px; background: #222; border-radius: 5px; padding: 10px; font-size: 0.8rem; color: #555;">Ahmed Mansouri</div>
+                        <div style="height: 40px; background: #222; border-radius: 5px; padding: 10px; font-size: 0.8rem; color: #555;">Volkswagen Golf 8 (Matricule: 12345-A-1)</div>
+                        <div style="height: 60px; background: #222; border-radius: 5px; padding: 10px; font-size: 0.8rem; color: #555;">Caution: 10,000 MAD / Franchise: 5%</div>
+                        <button class="cta-button" style="padding: 0.8rem; font-size: 0.8rem;" onclick="alert('Contrat généré avec succès ! Prêt pour impression.')">Générer le PDF de Location</button>
                     </div>
                 </div>
-                <div class="mock-card" style="background: #fff; color: #333;">
+                <div class="mock-card" style="background: #fff; color: #333; position: relative;">
                     <div style="text-align: center; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;">
-                        <h4 style="margin:0;">CONTRAT DE LOCATION</h4>
-                        <span style="font-size: 0.6rem;">MARINA CAR RABAT</span>
+                        <h4 style="margin:0; font-weight: 900;">CONTRAT DE LOCATION N°2026-045</h4>
+                        <span style="font-size: 0.5rem; letter-spacing: 2px;">MARINA CAR RABAT - MAROC</span>
                     </div>
-                    <div style="font-size: 0.6rem; line-height: 1.4;">
-                        <p><strong>Locataire:</strong> ............................................</p>
-                        <p><strong>Véhicule:</strong> ...........................................</p>
-                        <p><strong>Période:</strong> Du ../../2026 Au ../../2026</p>
-                        <div style="margin-top: 20px; height: 40px; border: 1px dashed #ccc;"></div>
-                        <p style="text-align: right; margin-top: 10px;">Signature: ____________</p>
+                    <div style="font-size: 0.6rem; line-height: 1.6; font-family: sans-serif;">
+                        <p><strong>PROPRIÉTAIRE:</strong> Marina Car SARL, Rabat Marina.</p>
+                        <p><strong>LOCATAIRE:</strong> Ahmed Mansouri (CIN: AB123456)</p>
+                        <p><strong>VÉHICULE:</strong> VW Golf 8 - Diesel - Automatique</p>
+                        <p><strong>DURÉE:</strong> 06/05/2026 au 10/05/2026</p>
+                        <div style="margin-top: 30px; height: 50px; border: 1px dashed #aaa; padding: 5px; text-align: center; color: #aaa;">CADRE RÉSERVÉ À LA SIGNATURE</div>
+                        <p style="text-align: right; margin-top: 10px; font-weight: bold;">Lu et Approuvé</p>
                     </div>
                 </div>
             </div>
@@ -134,20 +175,30 @@
     </section>
 
     <!-- Solution 3: Tracking GPS -->
-    <section class="demo-section">
+    <section class="demo-section" id="tracking">
         <div class="section-header">
-            <h2>Exemple: Module Tracking GPS</h2>
-            <p>Suivi en temps réel de votre flotte sur carte interactive.</p>
+            <h2>Démonstration: Tracking GPS Satellite</h2>
+            <p>Suivez vos véhicules en temps réel pour une sécurité totale.</p>
         </div>
         <div class="demo-window">
-            <div class="map-mock">
-                <i class="fas fa-car map-car" style="top: 30%; left: 40%;"></i>
-                <i class="fas fa-car map-car" style="top: 60%; left: 20%; color: #fff;"></i>
-                <i class="fas fa-car map-car" style="top: 45%; left: 70%; color: #27c93f;"></i>
-                <div style="position: absolute; bottom: 20px; right: 20px; background: var(--bg); padding: 15px; border-radius: 10px; border: 1px solid var(--primary); font-size: 0.8rem;">
-                    <div style="margin-bottom: 5px;"><i class="fas fa-circle" style="color: #27c93f;"></i> Véhicule #84 (Golf 8) - En mouvement</div>
-                    <div style="margin-bottom: 5px;"><i class="fas fa-circle" style="color: #ff5f56;"></i> Véhicule #12 (Range Rover) - Arrêté</div>
-                    <div><i class="fas fa-circle" style="color: var(--primary);"></i> Véhicule #03 (Classe G) - Maintenance</div>
+            <!-- Map Overlay -->
+            <div class="map-overlay" id="mapOverlay">
+                <div style="text-align: center;">
+                    <i class="fas fa-satellite-dish" style="font-size: 4rem; color: var(--primary); margin-bottom: 2rem;"></i>
+                    <h3 style="margin-bottom: 2rem;">Système GPS Déconnecté</h3>
+                    <button class="cta-button" onclick="activateGPS()">Activer le Suivi en Direct</button>
+                </div>
+            </div>
+
+            <div class="map-mock" id="mapView">
+                <i class="fas fa-car map-car" id="car1" style="top: 35%; left: 45%;"></i>
+                <i class="fas fa-car map-car" id="car2" style="top: 65%; left: 25%; color: #fff;"></i>
+                <i class="fas fa-car map-car" id="car3" style="top: 50%; left: 75%; color: #27c93f;"></i>
+                
+                <div id="gpsStatus" style="position: absolute; bottom: 20px; right: 20px; background: var(--bg); padding: 15px; border-radius: 10px; border: 1px solid var(--primary); font-size: 0.8rem; opacity: 0; transition: 0.5s;">
+                    <div style="margin-bottom: 5px;"><i class="fas fa-circle" style="color: #27c93f;"></i> Véhicule #84 (Golf 8) - 45 km/h</div>
+                    <div style="margin-bottom: 5px;"><i class="fas fa-circle" style="color: #ff5f56;"></i> Véhicule #12 (Range Rover) - Stationné</div>
+                    <div><i class="fas fa-circle" style="color: var(--primary);"></i> Véhicule #03 (Classe G) - Rabat Marina</div>
                 </div>
             </div>
         </div>
@@ -158,6 +209,29 @@
         <p class="copyright">&copy; 2026 Marina Car Rabat. Tous droits réservés.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        function unlockAdmin() {
+            document.getElementById('adminLogin').classList.add('hidden');
+        }
+
+        function activateGPS() {
+            document.getElementById('mapOverlay').classList.add('hidden');
+            document.getElementById('gpsStatus').style.opacity = '1';
+            
+            // Activate car markers
+            document.getElementById('car1').classList.add('active');
+            document.getElementById('car2').classList.add('active');
+            document.getElementById('car3').classList.add('active');
+
+            // Simulate movement
+            setInterval(() => {
+                const car = document.getElementById('car1');
+                const top = parseInt(car.style.top);
+                const left = parseInt(car.style.left);
+                car.style.top = (top + (Math.random() * 2 - 1)) + '%';
+                car.style.left = (left + (Math.random() * 2 - 1)) + '%';
+            }, 2000);
+        }
+    </script>
 </body>
 </html>
