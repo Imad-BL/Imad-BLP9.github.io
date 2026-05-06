@@ -319,6 +319,15 @@ nav {
     color: var(--text-muted);
 }
 
+.price-note {
+    font-size: 0.8rem;
+    color: var(--primary);
+    margin-top: -1.5rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+    opacity: 0.8;
+}
+
 .price-card ul {
     list-style: none;
     text-align: left;
