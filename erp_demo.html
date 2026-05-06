@@ -3,94 +3,348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Office ERP | Gestion Administrative Marina Car</title>
+    <title>Module 3 – Office ERP | Marina Car Demo</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .erp-layout { display: grid; grid-template-columns: 260px 1fr; height: 100vh; background: #f4f7f6; color: #333; overflow: hidden; }
-        .erp-aside { background: #2c3e50; color: #fff; padding: 2rem 1.5rem; display: flex; flex-direction: column; }
-        .erp-main { overflow-y: auto; background: #ecf0f1; }
-        .erp-header { background: #fff; padding: 1rem 3rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .aside-link { padding: 0.8rem 1.2rem; border-radius: 8px; margin-bottom: 0.5rem; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 12px; font-size: 0.9rem; }
-        .aside-link:hover { background: #34495e; }
-        .aside-link.active { background: #3498db; }
-        .erp-card { background: #fff; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 2rem; }
-        .erp-table { width: 100%; border-collapse: collapse; }
-        .erp-table th { text-align: left; padding: 12px; border-bottom: 2px solid #eee; color: #7f8c8d; font-size: 0.8rem; }
-        .erp-table td { padding: 15px 12px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+        .demo-nav { position:fixed;top:0;left:0;width:100%;background:rgba(5,5,5,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,175,55,0.2);z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px; }
+        .demo-nav-left { display:flex;align-items:center;gap:1.5rem; }
+        .demo-nav-logo { font-weight:900;color:var(--primary);font-size:1.1rem;letter-spacing:2px; }
+        .demo-progress { display:flex;align-items:center;gap:0.5rem; }
+        .demo-dot { width:28px;height:4px;border-radius:2px;background:rgba(255,255,255,0.1);transition:all 0.3s; }
+        .demo-dot.done { background:rgba(212,175,55,0.4); }
+        .demo-dot.active { background:var(--primary); }
+        .demo-module-label { font-size:0.7rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary); }
+        .demo-nav-right { display:flex;align-items:center;gap:1rem; }
+        .demo-btn { padding:0.6rem 1.4rem;border-radius:2px;font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s; }
+        .demo-btn-prev { background:transparent;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5); }
+        .demo-btn-prev:hover { border-color:rgba(255,255,255,0.4);color:#fff; }
+        .demo-btn-next { background:var(--primary);border:1px solid var(--primary);color:#000; }
+        .demo-btn-next:hover { background:var(--primary-bright);transform:translateY(-2px); }
+        .demo-exit { font-size:0.7rem;color:rgba(255,255,255,0.3);text-decoration:none;padding:0.4rem 0.8rem;transition:color 0.3s; }
+        .demo-exit:hover { color:rgba(255,255,255,0.7); }
+
+        body { margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+
+        /* HEADER INTRO */
+        .erp-intro {
+            padding: 5rem 5% 3rem;
+            text-align: center;
+            background: #0d1117;
+            padding-top: calc(64px + 4rem);
+        }
+        .erp-badge { display:inline-block;background:rgba(52,152,219,0.1);border:1px solid rgba(52,152,219,0.3);color:#3498db;padding:0.4rem 1.2rem;border-radius:100px;font-size:0.65rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;margin-bottom:1.5rem; }
+        .erp-intro h1 { font-size:clamp(2.5rem,5vw,4rem);font-weight:800;margin-bottom:1rem;color:#fff; }
+        .erp-intro h1 span { color:#3498db; }
+        .erp-intro p { color:rgba(255,255,255,0.5);max-width:600px;margin:0 auto;font-size:1rem;line-height:1.8; }
+
+        /* ERP INTERFACE */
+        .erp-wrapper {
+            margin: 2rem 5%;
+            background: #ecf0f1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .erp-top-bar {
+            background: #2c3e50;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .erp-top-bar-left { display:flex;align-items:center;gap:10px; }
+        .erp-app-name { font-weight:900;font-size:1rem;color:#3498db;letter-spacing:2px; }
+        .erp-top-bar-right { display:flex;align-items:center;gap:1rem; }
+        .erp-top-btn { padding:0.5rem 1.2rem;border-radius:4px;font-size:0.75rem;font-weight:700;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:6px; }
+        .erp-btn-blue { background:#3498db;color:#fff; }
+        .erp-btn-outline { background:transparent;border:1px solid rgba(52,152,219,0.5);color:#3498db; }
+
+        .erp-layout { display:grid;grid-template-columns:240px 1fr;height:auto; }
+        .erp-aside {
+            background: #2c3e50; color:#fff; padding:1.5rem 1rem;
+            display:flex;flex-direction:column;gap:0.3rem;
+        }
+        .aside-item { padding:0.8rem 1rem;border-radius:8px;font-size:0.85rem;display:flex;align-items:center;gap:10px;cursor:pointer;transition:0.3s;color:#95a5a6; }
+        .aside-item:hover { background:rgba(255,255,255,0.05);color:#bdc3c7; }
+        .aside-item.active { background:#3498db;color:#fff; }
+        .aside-sep { height:1px;background:rgba(255,255,255,0.08);margin:0.5rem 0; }
+
+        .erp-main { background:#ecf0f1;padding:2rem; }
+        .erp-kpi-row { display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem; }
+        .erp-kpi { background:#fff;border-radius:10px;padding:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.05); }
+        .erp-kpi-label { font-size:0.6rem;color:#95a5a6;text-transform:uppercase;letter-spacing:2px;margin-bottom:0.5rem; }
+        .erp-kpi-val { font-size:1.6rem;font-weight:900;color:#2c3e50; }
+        .erp-kpi-val.blue { color:#3498db; }
+        .erp-kpi-val.green { color:#27ae60; }
+        .erp-kpi-val.orange { color:#e67e22; }
+
+        .erp-section-card { background:#fff;border-radius:10px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.05);margin-bottom:1.5rem; }
+        .erp-section-card h4 { font-size:0.9rem;color:#2c3e50;margin-bottom:1.2rem;font-weight:700;display:flex;align-items:center;gap:10px; }
+        .erp-table { width:100%;border-collapse:collapse; }
+        .erp-table th { text-align:left;padding:10px 12px;border-bottom:2px solid #eee;color:#95a5a6;font-size:0.7rem;text-transform:uppercase;letter-spacing:1px; }
+        .erp-table td { padding:12px;border-bottom:1px solid #f5f5f5;font-size:0.85rem;color:#34495e; }
+        .erp-table tr:last-child td { border:none; }
+        .erp-table tr:hover td { background:#f8f9fa; }
+        .badge { display:inline-block;padding:3px 10px;border-radius:100px;font-size:0.65rem;font-weight:800; }
+        .badge-green { background:rgba(39,174,96,0.1);color:#27ae60; }
+        .badge-orange { background:rgba(230,126,34,0.1);color:#e67e22; }
+        .badge-red { background:rgba(231,76,60,0.1);color:#e74c3c; }
+        .badge-blue { background:rgba(52,152,219,0.1);color:#3498db; }
+        .erp-btn-sm { padding:0.3rem 0.8rem;border-radius:4px;font-size:0.7rem;font-weight:700;border:none;cursor:pointer;text-decoration:none; }
+        .erp-btn-edit { background:rgba(52,152,219,0.1);color:#3498db; }
+        .erp-btn-pdf { background:rgba(231,76,60,0.1);color:#e74c3c; }
+
+        .erp-two-col { display:grid;grid-template-columns:1fr 1fr;gap:1.5rem; }
+        .alert-item { padding:10px 12px;background:#fff;border-radius:8px;border-left:4px solid #e74c3c;margin-bottom:0.8rem;box-shadow:0 1px 4px rgba(0,0,0,0.05); }
+        .alert-item.warn { border-left-color:#e67e22; }
+        .alert-title { font-size:0.85rem;font-weight:700;color:#2c3e50;margin-bottom:3px; }
+        .alert-desc { font-size:0.75rem;color:#95a5a6; }
+
+        /* WHAT & CTA */
+        .erp-what { padding:5rem 5%;background:#fff; }
+        .erp-what-inner { max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center; }
+        .erp-what-text h2 { font-size:2.2rem;font-weight:800;margin-bottom:1rem;color:#1a1a2e; }
+        .erp-what-text h2 span { color:#3498db; }
+        .erp-what-text p { color:#666;line-height:1.8;margin-bottom:2rem; }
+        .erp-list { list-style:none;padding:0; }
+        .erp-list li { display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem;font-size:0.9rem;color:#333; }
+        .erp-list li i { color:#3498db;width:16px; }
+        .erp-features-visual { display:flex;flex-direction:column;gap:1rem; }
+        .erp-feat-chip { background:#f4f7f9;border:1px solid #e0e0e0;border-radius:10px;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem; }
+        .erp-feat-chip i { font-size:1.2rem;color:#3498db; }
+        .erp-feat-chip-text h5 { margin:0 0 3px;font-size:0.85rem;color:#2c3e50; }
+        .erp-feat-chip-text p { margin:0;font-size:0.75rem;color:#95a5a6; }
+
+        .erp-cta { padding:5rem 5%;text-align:center;background:#f4f7f9;border-top:1px solid #e0e0e0; }
+        .erp-cta h2 { font-size:2.2rem;font-weight:800;margin-bottom:1rem;color:#1a1a2e; }
+        .erp-cta p { color:#666;margin-bottom:2.5rem; }
+
+        @media(max-width:1024px){
+            .erp-layout { grid-template-columns:1fr; }
+            .erp-aside { flex-direction:row;flex-wrap:wrap;padding:1rem; }
+            .erp-kpi-row { grid-template-columns:repeat(2,1fr); }
+            .erp-two-col,.erp-what-inner { grid-template-columns:1fr; }
+            .demo-progress { display:none; }
+        }
     </style>
 </head>
 <body>
-    <div class="erp-layout">
-        <aside class="erp-aside">
-            <div style="font-size: 1.5rem; font-weight: 900; color: #3498db; text-align: center; margin-bottom: 3rem;">OFFICE ERP</div>
-            <div class="aside-link active"><i class="fas fa-file-contract"></i> Gestion Contrats</div>
-            <div class="aside-link"><i class="fas fa-car"></i> Parc Automobile</div>
-            <div class="aside-link"><i class="fas fa-users"></i> Base Clients</div>
-            <div class="aside-link"><i class="fas fa-wallet"></i> Trésorerie</div>
-            <div class="aside-link"><i class="fas fa-tools"></i> Maintenance</div>
-            <div style="margin-top: auto; text-align: center; font-size: 0.7rem; color: #95a5a6;">Agent: Walid Fakak</div>
-        </aside>
+    <nav class="demo-nav">
+        <div class="demo-nav-left">
+            <div class="demo-nav-logo">Marina Car</div>
+            <div class="demo-module-label">Module 3 / 5</div>
+            <div class="demo-progress">
+                <div class="demo-dot done"></div>
+                <div class="demo-dot done"></div>
+                <div class="demo-dot active"></div>
+                <div class="demo-dot"></div>
+                <div class="demo-dot"></div>
+            </div>
+        </div>
+        <div class="demo-nav-right">
+            <a href="demo_hub.html" class="demo-exit"><i class="fas fa-th-large"></i> Hub</a>
+            <a href="admin_demo.html" class="demo-btn demo-btn-prev"><i class="fas fa-arrow-left"></i> Précédent</a>
+            <a href="gps_demo.html" class="demo-btn demo-btn-next">Suivant : GPS Live <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </nav>
 
-        <main class="erp-main">
-            <header class="erp-header">
-                <h3 style="margin:0;">Administration Marina Car</h3>
-                <div style="display: flex; gap: 20px; align-items: center;">
-                    <button class="cta-button" style="padding: 0.6rem 1.2rem; font-size: 0.8rem; background: #3498db;">+ Nouveau Contrat</button>
-                    <div style="width: 40px; height: 40px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-user"></i></div>
+    <!-- INTRO -->
+    <div class="erp-intro">
+        <div class="erp-badge">Module 03 — Office ERP</div>
+        <h1>Gérez tout votre Bureau en <span>Un Seul Endroit</span></h1>
+        <p>Contrats, planning, clients, trésorerie et maintenance — tout est centralisé et automatisé dans un panneau d'administration clair et intuitif.</p>
+    </div>
+
+    <!-- ERP INTERFACE -->
+    <div class="erp-wrapper">
+        <div class="erp-top-bar">
+            <div class="erp-top-bar-left">
+                <span class="erp-app-name">OFFICE ERP</span>
+                <span style="font-size:0.7rem;color:#7f8c8d;">| Administration Marina Car</span>
+            </div>
+            <div class="erp-top-bar-right">
+                <button class="erp-top-btn erp-btn-outline"><i class="fas fa-file-pdf"></i> Export PDF</button>
+                <button class="erp-top-btn erp-btn-blue" onclick="alert('Dans la version réelle, un nouveau contrat est généré automatiquement en PDF.')"><i class="fas fa-plus"></i> Nouveau Contrat</button>
+                <div style="width:34px;height:34px;background:#34495e;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fas fa-user" style="font-size:0.8rem;color:#95a5a6;"></i></div>
+            </div>
+        </div>
+
+        <div class="erp-layout">
+            <div class="erp-aside">
+                <div class="aside-item active"><i class="fas fa-file-contract"></i> Contrats</div>
+                <div class="aside-item"><i class="fas fa-car"></i> Parc Auto</div>
+                <div class="aside-item"><i class="fas fa-users"></i> Clients (CRM)</div>
+                <div class="aside-item"><i class="fas fa-wallet"></i> Trésorerie</div>
+                <div class="aside-sep"></div>
+                <div class="aside-item"><i class="fas fa-tools"></i> Maintenance</div>
+                <div class="aside-item"><i class="fas fa-calendar-alt"></i> Planning</div>
+                <div class="aside-item"><i class="fas fa-cog"></i> Paramètres</div>
+                <div style="margin-top:auto;padding:1rem;background:rgba(52,152,219,0.1);border-radius:8px;text-align:center;border:1px solid rgba(52,152,219,0.2);">
+                    <div style="font-size:0.55rem;color:#3498db;letter-spacing:2px;font-weight:800;margin-bottom:5px;">OFFRE COMMERCIALE</div>
+                    <div style="font-size:1rem;font-weight:900;color:#fff;">Dès 19,900 <span style="font-size:0.7rem;">MAD</span></div>
                 </div>
-            </header>
+            </div>
 
-            <div style="padding: 3rem;">
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 3rem;">
-                    <div class="erp-card" style="padding: 1.5rem; text-align: center; margin: 0;"><div style="font-size: 0.7rem; color: #888;">CONTRATS ACTIFS</div><div style="font-size: 1.8rem; font-weight: 900;">24</div></div>
-                    <div class="erp-card" style="padding: 1.5rem; text-align: center; margin: 0;"><div style="font-size: 0.7rem; color: #888;">RETOURS DU JOUR</div><div style="font-size: 1.8rem; font-weight: 900; color: #e67e22;">08</div></div>
-                    <div class="erp-card" style="padding: 1.5rem; text-align: center; margin: 0;"><div style="font-size: 0.7rem; color: #888;">CAISSE (24H)</div><div style="font-size: 1.8rem; font-weight: 900; color: #27ae60;">12,400 MAD</div></div>
-                    <div class="erp-card" style="padding: 1.5rem; text-align: center; margin: 0;"><div style="font-size: 0.7rem; color: #888;">DISPONIBLES</div><div style="font-size: 1.8rem; font-weight: 900;">15</div></div>
+            <div class="erp-main">
+                <div class="erp-kpi-row">
+                    <div class="erp-kpi">
+                        <div class="erp-kpi-label">Contrats Actifs</div>
+                        <div class="erp-kpi-val blue">24</div>
+                    </div>
+                    <div class="erp-kpi">
+                        <div class="erp-kpi-label">Retours du Jour</div>
+                        <div class="erp-kpi-val orange">08</div>
+                    </div>
+                    <div class="erp-kpi">
+                        <div class="erp-kpi-label">Caisse (24h)</div>
+                        <div class="erp-kpi-val green">12,400 MAD</div>
+                    </div>
+                    <div class="erp-kpi">
+                        <div class="erp-kpi-label">Véhicules Disponibles</div>
+                        <div class="erp-kpi-val">15</div>
+                    </div>
                 </div>
 
-                <div class="erp-card">
-                    <h4 style="margin-bottom: 2rem;">Contrats en cours de validité</h4>
+                <div class="erp-section-card">
+                    <h4><i class="fas fa-file-contract" style="color:#3498db;"></i> Contrats en Cours</h4>
                     <table class="erp-table">
                         <thead>
-                            <tr><th>CLIENT</th><th>VÉHICULE</th><th>PÉRIODE</th><th>PAIEMENT</th><th>ACTION</th></tr>
+                            <tr>
+                                <th>N° Contrat</th>
+                                <th>Client</th>
+                                <th>Véhicule</th>
+                                <th>Période</th>
+                                <th>Montant</th>
+                                <th>Paiement</th>
+                                <th>Actions</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <tr>
+                                <td><strong>#MC-2026-084</strong></td>
                                 <td>Karim El Idrissi</td>
                                 <td>Mercedes G-Class</td>
-                                <td>01/05 - 08/05</td>
-                                <td><span style="color:#27ae60; font-weight:700;">PAYÉ</span></td>
-                                <td><button style="color: #3498db; border: none; background: none; font-weight: 700; cursor: pointer;">Editer</button></td>
+                                <td>01/05 — 08/05</td>
+                                <td><strong>10,500 MAD</strong></td>
+                                <td><span class="badge badge-green">✔ PAYÉ</span></td>
+                                <td>
+                                    <a class="erp-btn-sm erp-btn-edit" style="margin-right:4px;">Éditer</a>
+                                    <a class="erp-btn-sm erp-btn-pdf" onclick="alert('Contrat PDF généré automatiquement.')">PDF</a>
+                                </td>
                             </tr>
                             <tr>
+                                <td><strong>#MC-2026-083</strong></td>
                                 <td>Sarah Chraibi</td>
                                 <td>VW Golf 8</td>
-                                <td>04/05 - 06/05</td>
-                                <td><span style="color:#e67e22; font-weight:700;">PARTIEL</span></td>
-                                <td><button style="color: #3498db; border: none; background: none; font-weight: 700; cursor: pointer;">Editer</button></td>
+                                <td>04/05 — 06/05</td>
+                                <td><strong>2,800 MAD</strong></td>
+                                <td><span class="badge badge-orange">◕ PARTIEL</span></td>
+                                <td>
+                                    <a class="erp-btn-sm erp-btn-edit" style="margin-right:4px;">Éditer</a>
+                                    <a class="erp-btn-sm erp-btn-pdf" onclick="alert('Contrat PDF généré automatiquement.')">PDF</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#MC-2026-082</strong></td>
+                                <td>Omar Tazi</td>
+                                <td>Hyundai Tucson</td>
+                                <td>05/05 — 09/05</td>
+                                <td><strong>4,400 MAD</strong></td>
+                                <td><span class="badge badge-blue">⏳ EN ATTENTE</span></td>
+                                <td>
+                                    <a class="erp-btn-sm erp-btn-edit" style="margin-right:4px;">Éditer</a>
+                                    <a class="erp-btn-sm erp-btn-pdf" onclick="alert('Contrat PDF généré automatiquement.')">PDF</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                    <div class="erp-card">
-                        <h4 style="margin-bottom: 1.5rem;">Alertes Maintenance</h4>
-                        <div style="display: flex; flex-direction: column; gap: 10px;">
-                            <div style="padding: 10px; background: rgba(231, 76, 60, 0.05); border-radius: 8px; border-left: 4px solid #e74c3c;">
-                                <p style="font-weight: 700; font-size: 0.9rem;">Range Rover (Mat: 5678-B)</p>
-                                <p style="font-size: 0.8rem; color: #666;">Vidange immédiate (Dépassement 200km)</p>
+                <div class="erp-two-col">
+                    <div class="erp-section-card">
+                        <h4><i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> Alertes Maintenance</h4>
+                        <div class="alert-item">
+                            <div class="alert-title">Range Rover Evoque (5678-B)</div>
+                            <div class="alert-desc">Vidange requise — +200 km dépassés</div>
+                        </div>
+                        <div class="alert-item warn">
+                            <div class="alert-title">VW Tiguan (3421-A)</div>
+                            <div class="alert-desc">Révision programmée dans 5 jours</div>
+                        </div>
+                    </div>
+                    <div class="erp-section-card">
+                        <h4><i class="fas fa-calendar-check" style="color:#3498db;"></i> Planning du Jour</h4>
+                        <div style="display:flex;flex-direction:column;gap:8px;">
+                            <div style="background:#f8f9fa;border-radius:6px;padding:10px 12px;border-left:3px solid #3498db;">
+                                <div style="font-size:0.8rem;font-weight:700;">09:30 — Remise VW Golf 8</div>
+                                <div style="font-size:0.7rem;color:#666;">Client: Sarah Chraibi — Retour prévu</div>
+                            </div>
+                            <div style="background:#f8f9fa;border-radius:6px;padding:10px 12px;border-left:3px solid #27ae60;">
+                                <div style="font-size:0.8rem;font-weight:700;">14:00 — Départ Tucson</div>
+                                <div style="font-size:0.7rem;color:#666;">Client: Omar Tazi — Contrat signé</div>
+                            </div>
+                            <div style="background:#f8f9fa;border-radius:6px;padding:10px 12px;border-left:3px solid #e67e22;">
+                                <div style="font-size:0.8rem;font-weight:700;">17:00 — Paiement partiel attendu</div>
+                                <div style="font-size:0.7rem;color:#666;">Client: Sarah Chraibi — Solde restant</div>
                             </div>
                         </div>
                     </div>
-                    <div class="erp-card">
-                        <h4 style="margin-bottom: 1.5rem;">Documents Manquants</h4>
-                        <p style="font-size: 0.8rem; color: #888;">Tous les dossiers clients sont à jour.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHAT CLIENT GETS -->
+    <div class="erp-what">
+        <div class="erp-what-inner">
+            <div class="erp-what-text">
+                <h2>Votre Bureau, <span>Automatisé</span></h2>
+                <p>L'ERP Office remplace les classeurs, les cahiers et les appels téléphoniques par une plateforme centralisée qui gère tout à votre place.</p>
+                <ul class="erp-list">
+                    <li><i class="fas fa-check"></i> Génération automatique de contrats en PDF</li>
+                    <li><i class="fas fa-check"></i> Planning des véhicules et des retours</li>
+                    <li><i class="fas fa-check"></i> Base de données client (CRM) complète</li>
+                    <li><i class="fas fa-check"></i> Suivi de la trésorerie journalière</li>
+                    <li><i class="fas fa-check"></i> Alertes maintenance proactives</li>
+                    <li><i class="fas fa-check"></i> Accessible depuis n'importe quel appareil</li>
+                </ul>
+            </div>
+            <div class="erp-features-visual">
+                <div class="erp-feat-chip">
+                    <i class="fas fa-file-pdf"></i>
+                    <div class="erp-feat-chip-text">
+                        <h5>Contrats Auto-générés</h5>
+                        <p>PDF professionnel en 1 clic, signable et archivé automatiquement</p>
+                    </div>
+                </div>
+                <div class="erp-feat-chip">
+                    <i class="fas fa-bell"></i>
+                    <div class="erp-feat-chip-text">
+                        <h5>Alertes Intelligentes</h5>
+                        <p>Maintenance, retards de paiement, retours de véhicules — tout est notifié</p>
+                    </div>
+                </div>
+                <div class="erp-feat-chip">
+                    <i class="fas fa-shield-alt"></i>
+                    <div class="erp-feat-chip-text">
+                        <h5>Données Sécurisées</h5>
+                        <p>Hébergement cloud avec sauvegarde quotidienne automatique</p>
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
     </div>
+
+    <!-- CTA NEXT -->
+    <div class="erp-cta">
+        <h2>Vous voyez la puissance ?</h2>
+        <p>Découvrez maintenant le module GPS — surveillance de votre flotte en direct. Module 4/5</p>
+        <a href="gps_demo.html" class="cta-button">
+            Module Suivant : Tracking GPS Live <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

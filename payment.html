@@ -3,65 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paiement Sécurisé | Démo Marina Car</title>
+    <title>Paiement | Marina Car</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background:#f4f7f9;color:#1a1a2e;font-family:'Outfit',sans-serif;min-height:100vh; }
+
+        nav {
+            background:#fff;
+            box-shadow:0 2px 10px rgba(0,0,0,0.06);
+            padding:1rem 5%;
+            display:flex;align-items:center;justify-content:space-between;
+        }
+        nav .logo { color:#1a1a2e;font-size:1.3rem;font-weight:900;letter-spacing:2px; }
+        nav .logo span { color:var(--primary); }
+        .nav-back { display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;color:#888;text-decoration:none;transition:color 0.3s; }
+        .nav-back:hover { color:#1a1a2e; }
+
+        /* MAIN CONTAINER */
+        .pay-container {
+            max-width:700px;
+            margin:3rem auto;
+            padding:0 1.5rem;
+        }
+
+        /* BREADCRUMB STEPS */
+        .pay-steps {
+            display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:2.5rem;
+        }
+        .pay-step { display:flex;flex-direction:column;align-items:center;flex:1; }
+        .pay-step-circle { width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;position:relative;z-index:2; }
+        .pay-step-circle.done { background:var(--primary);color:#000; }
+        .pay-step-circle.current { background:var(--primary);color:#000;box-shadow:0 0 0 4px rgba(212,175,55,0.2); }
+        .pay-step-circle.pending { background:#e0e0e0;color:#aaa; }
+        .pay-step-label { font-size:0.65rem;color:#aaa;margin-top:6px;text-align:center;font-weight:600; }
+        .pay-step-label.active { color:var(--primary);font-weight:800; }
+        .pay-step-line { flex:1;height:2px;background:#e0e0e0;margin:-18px 0 0; }
+        .pay-step-line.done { background:var(--primary); }
+
+        /* MAIN CARD */
+        .pay-card {
+            background:#fff;border-radius:16px;padding:2.5rem;
+            box-shadow:0 4px 20px rgba(0,0,0,0.06);
+            margin-bottom:1.5rem;
+        }
+        .pay-card-title { font-size:1.1rem;font-weight:800;margin-bottom:1.5rem;color:#1a1a2e;display:flex;align-items:center;gap:10px; }
+        .pay-card-title i { color:var(--primary); }
+
+        /* ORDER SUMMARY */
+        .order-summary {
+            background:#f9f9f9;border:1px solid #eee;border-radius:10px;
+            padding:1.2rem;margin-bottom:1.5rem;
+        }
+        .order-row { display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0; }
+        .order-row.total { border-top:2px solid #eee;margin-top:0.5rem;padding-top:0.8rem; }
+        .order-label { font-size:0.9rem;color:#666; }
+        .order-label.bold { font-weight:700;color:#1a1a2e; }
+        .order-value { font-size:0.9rem;color:#1a1a2e; }
+        .order-value.total-val { font-size:1.3rem;font-weight:900;color:var(--primary); }
+        .discount-tag { display:inline-block;background:rgba(212,175,55,0.1);color:var(--primary);font-size:0.65rem;font-weight:800;padding:2px 8px;border-radius:100px;margin-left:8px; }
+
+        /* PAYMENT METHOD CHOICE */
+        .method-info {
+            background:linear-gradient(135deg,rgba(212,175,55,0.05),rgba(212,175,55,0.02));
+            border:1px solid rgba(212,175,55,0.2);
+            border-radius:12px;
+            padding:1.5rem;
+            margin-bottom:1.5rem;
+        }
+        .method-info-icon { display:flex;align-items:center;gap:12px;margin-bottom:1rem; }
+        .method-info-icon i { font-size:1.5rem;color:var(--primary); }
+        .method-info-icon h4 { font-size:1rem;font-weight:800;margin:0;color:#1a1a2e; }
+        .method-info p { font-size:0.85rem;color:#888;margin:0;line-height:1.7; }
+        .method-options { display:flex;flex-wrap:wrap;gap:0.8rem;margin-top:1.2rem; }
+        .method-chip { display:inline-flex;align-items:center;gap:8px;padding:0.5rem 1rem;background:#f4f4f4;border:1px solid #e0e0e0;border-radius:8px;font-size:0.8rem;font-weight:600;color:#555; }
+        .method-chip i { color:var(--primary); }
+        .method-chip.active { background:rgba(212,175,55,0.08);border-color:rgba(212,175,55,0.3);color:#1a1a2e; }
+
+        /* CONTACT FORM */
+        .contact-cta-card {
+            background:#1a1a2e;border-radius:12px;padding:2rem;
+            text-align:center;margin-bottom:1.5rem;color:#fff;
+        }
+        .contact-cta-card h3 { font-size:1.1rem;font-weight:800;margin-bottom:0.5rem; }
+        .contact-cta-card p { font-size:0.85rem;color:rgba(255,255,255,0.5);margin-bottom:1.5rem; }
+        .contact-cta-card .contact-options { display:flex;justify-content:center;gap:1rem;flex-wrap:wrap; }
+        .contact-chip { display:inline-flex;align-items:center;gap:8px;padding:0.7rem 1.4rem;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;text-decoration:none;transition:0.3s; }
+        .chip-phone { background:rgba(39,201,63,0.15);color:#27c93f;border:1px solid rgba(39,201,63,0.3); }
+        .chip-phone:hover { background:rgba(39,201,63,0.25); }
+        .chip-whatsapp { background:rgba(37,211,102,0.15);color:#25d366;border:1px solid rgba(37,211,102,0.3); }
+        .chip-whatsapp:hover { background:rgba(37,211,102,0.25); }
+        .chip-email { background:rgba(212,175,55,0.1);color:var(--primary);border:1px solid rgba(212,175,55,0.3); }
+        .chip-email:hover { background:rgba(212,175,55,0.2); }
+
+        /* DEMO SIMULATE BUTTON */
+        .simulate-section { background:#fff;border-radius:16px;padding:2rem;box-shadow:0 4px 20px rgba(0,0,0,0.06); }
+        .simulate-label { font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:#aaa;margin-bottom:1rem;display:flex;align-items:center;gap:8px; }
+        .simulate-label::before, .simulate-label::after { content:'';flex:1;height:1px;background:#eee; }
+        .simulate-btn { width:100%;padding:1.1rem;background:var(--primary);border:none;border-radius:10px;color:#000;font-weight:900;font-size:0.9rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:0.3s; }
+        .simulate-btn:hover { background:#c5a059;transform:translateY(-2px);box-shadow:0 10px 20px rgba(212,175,55,0.25); }
+        .simulate-note { text-align:center;font-size:0.7rem;color:#aaa;margin-top:1rem; }
+        .simulate-note i { color:var(--primary); }
+
+        /* SECURITY BADGE */
+        .security-row { display:flex;align-items:center;justify-content:center;gap:2rem;margin-top:2rem;flex-wrap:wrap; }
+        .sec-item { display:flex;align-items:center;gap:6px;font-size:0.7rem;color:#aaa; }
+        .sec-item i { color:var(--primary); }
+    </style>
 </head>
-<body class="demo-body-light">
-    <nav style="background: #000;">
-        <div class="logo">Marina Car</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="solutions.html">Showroom</a></li>
-        </ul>
+<body>
+    <nav>
+        <div class="logo">Marina <span>Car</span></div>
+        <a href="profile.html" class="nav-back"><i class="fas fa-arrow-left"></i> Retour à mon espace</a>
     </nav>
 
-    <div class="demo-container-luxe" style="max-width: 600px;">
-        <div class="demo-card-light">
-            <div class="step-bar">
-                <div class="step-circle active">1</div>
-                <div class="step-circle active">2</div>
-                <div class="step-circle">3</div>
+    <div class="pay-container">
+
+        <!-- PROGRESS STEPS -->
+        <div class="pay-steps">
+            <div class="pay-step">
+                <div class="pay-step-circle done"><i class="fas fa-check" style="font-size:0.8rem;"></i></div>
+                <div class="pay-step-label active">Réservation</div>
+            </div>
+            <div class="pay-step-line done"></div>
+            <div class="pay-step">
+                <div class="pay-step-circle done"><i class="fas fa-check" style="font-size:0.8rem;"></i></div>
+                <div class="pay-step-label active">Contrat</div>
+            </div>
+            <div class="pay-step-line"></div>
+            <div class="pay-step">
+                <div class="pay-step-circle current">3</div>
+                <div class="pay-step-label active">Paiement</div>
+            </div>
+        </div>
+
+        <!-- ORDER SUMMARY -->
+        <div class="pay-card">
+            <div class="pay-card-title"><i class="fas fa-receipt"></i> Récapitulatif de la Location</div>
+            <div class="order-summary">
+                <div class="order-row">
+                    <span class="order-label">Volkswagen Golf 8 — 6 jours</span>
+                    <span class="order-value">3,200 MAD</span>
+                </div>
+                <div class="order-row">
+                    <span class="order-label">Assurance tous risques</span>
+                    <span class="order-value">300 MAD</span>
+                </div>
+                <div class="order-row">
+                    <span class="order-label">Acompte versé (à la signature)</span>
+                    <span class="order-value" style="color:#27ae60;">− 700 MAD</span>
+                </div>
+                <div class="order-row total">
+                    <span class="order-label bold">Solde restant à régler <span class="discount-tag">Gold −15%</span></span>
+                    <span class="order-value total-val">2,380 MAD</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAYMENT METHOD INFO -->
+        <div class="pay-card">
+            <div class="pay-card-title"><i class="fas fa-hand-holding-usd"></i> Mode de Paiement</div>
+            <div class="method-info">
+                <div class="method-info-icon">
+                    <i class="fas fa-info-circle"></i>
+                    <h4>Modalités convenues avec votre agence</h4>
+                </div>
+                <p>
+                    Les modalités de paiement (carte bancaire, virement, espèces, chèque…) sont définies et confirmées directement avec l'agence Marina Car lors de la signature du contrat de location.
+                </p>
+                <div class="method-options">
+                    <div class="method-chip active"><i class="fas fa-credit-card"></i> Carte Bancaire</div>
+                    <div class="method-chip"><i class="fas fa-university"></i> Virement</div>
+                    <div class="method-chip"><i class="fas fa-money-bill-alt"></i> Espèces</div>
+                    <div class="method-chip"><i class="fas fa-check-square"></i> Chèque</div>
+                </div>
             </div>
 
-            <h2 style="margin-bottom: 1.5rem; text-align: center;">Paiement Sécurisé</h2>
-            
-            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid var(--primary);">
-                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
-                    <span style="font-weight: 700;">Mercedes Classe G</span>
-                    <span>1,500 MAD/j</span>
-                </div>
-                <div style="display:flex; justify-content:space-between; font-size:0.9rem; color:#666;">
-                    <span>Location 3 Jours</span>
-                    <span style="font-weight: 800; color: var(--bg);">4,500 MAD</span>
+            <!-- CONTACT TO FINALIZE -->
+            <div class="contact-cta-card">
+                <h3>Finalisez votre paiement avec nous</h3>
+                <p>Contactez-nous directement pour choisir votre mode de règlement et obtenir confirmation immédiate.</p>
+                <div class="contact-options">
+                    <a href="tel:+212537000000" class="contact-chip chip-phone"><i class="fas fa-phone-alt"></i> Appeler</a>
+                    <a href="https://wa.me/212600000000" class="contact-chip chip-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="mailto:direction@marinacar.ma" class="contact-chip chip-email"><i class="fas fa-envelope"></i> Email</a>
                 </div>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label style="display:block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">Mode de paiement</label>
-                <div style="display: grid; gap: 10px; margin-bottom: 2rem;">
-                    <div style="border: 2px solid var(--primary); padding: 1rem; border-radius: 12px; display: flex; align-items: center; gap: 1rem; background: rgba(197, 160, 89, 0.05);">
-                        <i class="fas fa-credit-card" style="color: var(--primary);"></i>
-                        <span style="font-weight: 700;">Carte Bancaire (CMI)</span>
-                    </div>
-                </div>
-            </div>
+        <!-- SIMULATE BUTTON FOR DEMO -->
+        <div class="simulate-section">
+            <div class="simulate-label">Simulation de démo uniquement</div>
+            <button class="simulate-btn" onclick="alert('✅ Simulation : Paiement de 2,380 MAD validé.\n\nUn email de confirmation est envoyé à ahmed.mansouri@email.com\nContrat téléchargeable depuis votre espace client.')">
+                <i class="fas fa-bolt"></i> Simuler la Confirmation de Paiement
+            </button>
+            <div class="simulate-note"><i class="fas fa-shield-alt"></i> Dans la version finale, le mode de paiement est défini avec votre agence et intégré sécurisé SSL/PCI DSS</div>
+        </div>
 
-            <div style="display: grid; gap: 1.5rem;">
-                <input type="text" placeholder="Nom sur la carte" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
-                <input type="text" placeholder="Numéro de carte" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <input type="text" placeholder="MM/YY" style="padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
-                    <input type="text" placeholder="CVC" style="padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
-                </div>
-            </div>
-
-            <button class="cta-button" style="width:100%; margin-top: 2rem; padding: 1.2rem;" onclick="alert('Simulation: Paiement validé par la banque.')">Confirmer le Paiement</button>
-            
-            <p style="text-align: center; font-size: 0.7rem; color: #aaa; margin-top: 1.5rem;">
-                <i class="fas fa-shield-alt"></i> Données cryptées SSL - Certifié PCI DSS
-            </p>
+        <!-- SECURITY ROW -->
+        <div class="security-row">
+            <div class="sec-item"><i class="fas fa-lock"></i> Connexion chiffrée SSL</div>
+            <div class="sec-item"><i class="fas fa-shield-alt"></i> Données sécurisées</div>
+            <div class="sec-item"><i class="fas fa-check-circle"></i> Contrat certifié</div>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

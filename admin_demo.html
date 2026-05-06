@@ -3,88 +3,358 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Intelligence | Dashboard Admin Marina Car</title>
+    <title>Module 2 – Business Intelligence | Marina Car Demo</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .admin-layout { display: grid; grid-template-columns: 280px 1fr; height: 100vh; background: #080808; color: #fff; overflow: hidden; }
-        .admin-sidebar { background: #111; border-right: 1px solid #222; padding: 2rem; display: flex; flex-direction: column; }
-        .admin-main { padding: 2.5rem; overflow-y: auto; }
-        .dashboard-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
-        .stat-box { background: #1a1a1a; padding: 1.5rem; border-radius: 15px; border: 1px solid #252525; }
-        .stat-box h4 { font-size: 0.75rem; color: #777; text-transform: uppercase; margin-bottom: 1rem; }
-        .stat-box .val { font-size: 1.8rem; font-weight: 900; color: var(--primary); }
-        
-        .chart-mock { height: 250px; background: #151515; border-radius: 15px; border: 1px solid #252525; position: relative; padding: 2rem; }
-        .chart-bar-container { display: flex; align-items: flex-end; justify-content: space-between; height: 100%; gap: 10px; }
-        .bar { width: 30px; background: var(--primary); border-radius: 5px 5px 0 0; position: relative; }
-        .bar:hover { background: #fff; }
-        .bar::after { content: attr(data-val); position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: var(--primary); }
-        
-        .admin-table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
-        .admin-table th { text-align: left; padding: 1rem; border-bottom: 1px solid #333; color: #555; font-size: 0.8rem; }
-        .admin-table td { padding: 1.2rem 1rem; border-bottom: 1px solid #222; font-size: 0.9rem; }
+        /* DEMO NAV */
+        .demo-nav {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(5,5,5,0.97); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            z-index: 1000; padding: 0 5%;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 64px;
+        }
+        .demo-nav-left { display: flex; align-items: center; gap: 1.5rem; }
+        .demo-nav-logo { font-weight: 900; color: var(--primary); font-size: 1.1rem; letter-spacing: 2px; }
+        .demo-progress { display: flex; align-items: center; gap: 0.5rem; }
+        .demo-dot { width: 28px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.1); transition: all 0.3s; }
+        .demo-dot.done { background: rgba(212,175,55,0.4); }
+        .demo-dot.active { background: var(--primary); }
+        .demo-module-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); }
+        .demo-nav-right { display: flex; align-items: center; gap: 1rem; }
+        .demo-btn { padding: 0.6rem 1.4rem; border-radius: 2px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s; }
+        .demo-btn-prev { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); }
+        .demo-btn-prev:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
+        .demo-btn-next { background: var(--primary); border: 1px solid var(--primary); color: #000; }
+        .demo-btn-next:hover { background: var(--primary-bright); transform: translateY(-2px); }
+        .demo-exit { font-size: 0.7rem; color: rgba(255,255,255,0.3); text-decoration: none; padding: 0.4rem 0.8rem; transition: color 0.3s; }
+        .demo-exit:hover { color: rgba(255,255,255,0.7); }
+
+        /* LAYOUT */
+        body { background: #050505; color: #fff; padding-top: 64px; min-height: 100vh; }
+
+        .bi-header {
+            padding: 5rem 5% 3rem;
+            text-align: center;
+            background: linear-gradient(to bottom, #0a0a0a, #050505);
+        }
+        .bi-header .module-badge {
+            display: inline-block;
+            background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.3);
+            color: var(--primary); padding: 0.4rem 1.2rem; border-radius: 100px;
+            font-size: 0.65rem; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 1.5rem;
+        }
+        .bi-header h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; margin-bottom: 1rem; }
+        .bi-header h1 span { color: var(--primary); }
+        .bi-header p { color: rgba(255,255,255,0.5); max-width: 600px; margin: 0 auto; font-size: 1rem; line-height: 1.8; }
+
+        /* DASHBOARD FULL */
+        .bi-dashboard {
+            margin: 2rem 5% 0;
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+        }
+        .bi-dash-header {
+            background: #111; padding: 1rem 1.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .bi-dash-header h3 { font-size: 0.9rem; margin: 0; font-weight: 700; }
+        .bi-period {
+            background: #1a1a1a; padding: 0.5rem 1.2rem;
+            border-radius: 100px; font-size: 0.75rem; color: #888;
+            border: 1px solid #252525;
+        }
+        .bi-body { display: grid; grid-template-columns: 240px 1fr; }
+        .bi-sidebar {
+            background: #0a0a0a; padding: 1.5rem;
+            border-right: 1px solid #151515;
+            display: flex; flex-direction: column; gap: 0.3rem;
+        }
+        .bi-sidebar-logo { font-weight: 900; font-size: 1rem; color: var(--primary); text-align: center; margin-bottom: 2rem; letter-spacing: 2px; }
+        .bi-nav-item {
+            padding: 0.8rem 1rem; border-radius: 8px;
+            font-size: 0.85rem; display: flex; align-items: center; gap: 10px;
+            cursor: pointer; transition: 0.3s; color: #555;
+        }
+        .bi-nav-item.active { background: rgba(212,175,55,0.1); color: var(--primary); }
+        .bi-nav-item:hover { background: rgba(255,255,255,0.03); color: #888; }
+        .bi-main { padding: 2rem; overflow-y: auto; }
+
+        /* KPI CARDS */
+        .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+        .kpi-card {
+            background: #111; border: 1px solid #1a1a1a; border-radius: 10px;
+            padding: 1.2rem; position: relative; overflow: hidden;
+        }
+        .kpi-card::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--primary); opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .kpi-card:hover::after { opacity: 1; }
+        .kpi-label { font-size: 0.65rem; color: #555; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.8rem; }
+        .kpi-value { font-size: 1.6rem; font-weight: 900; color: var(--primary); }
+        .kpi-sub { font-size: 0.65rem; color: #27c93f; margin-top: 0.4rem; }
+        .kpi-sub.warn { color: #ffbd2e; }
+
+        /* CHART + ACQUISITION */
+        .bi-charts { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+        .chart-box { background: #111; border: 1px solid #1a1a1a; border-radius: 10px; padding: 1.5rem; }
+        .chart-box h4 { font-size: 0.8rem; color: #888; margin-bottom: 1.5rem; }
+        .chart-bars { display: flex; align-items: flex-end; gap: 8px; height: 160px; }
+        .c-bar { flex: 1; border-radius: 4px 4px 0 0; background: rgba(212,175,55,0.15); border: 1px solid rgba(212,175,55,0.2); cursor: pointer; position: relative; transition: 0.3s; }
+        .c-bar:hover { background: rgba(212,175,55,0.4); }
+        .c-bar.peak { background: var(--primary); }
+        .c-bar .c-label { position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%); font-size: 0.55rem; color: #555; white-space: nowrap; }
+        .c-bar .c-tip { position: absolute; top: -24px; left: 50%; transform: translateX(-50%); font-size: 0.55rem; color: var(--primary); font-weight: 700; white-space: nowrap; }
+        .c-legend { margin-top: 30px; display: flex; gap: 1rem; }
+        .c-leg-item { display: flex; align-items: center; gap: 6px; font-size: 0.65rem; color: #555; }
+        .c-leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+        .acq-row { display: flex; flex-direction: column; gap: 1rem; }
+        .acq-item { }
+        .acq-header { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 6px; }
+        .acq-header span:last-child { color: var(--primary); font-weight: 700; }
+        .acq-bar-bg { width: 100%; height: 5px; background: #1a1a1a; border-radius: 3px; }
+        .acq-bar-fill { height: 100%; background: var(--primary); border-radius: 3px; }
+
+        /* TABLE */
+        .bi-table-section { background: #111; border: 1px solid #1a1a1a; border-radius: 10px; padding: 1.5rem; }
+        .bi-table-section h4 { font-size: 0.85rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .live-badge { font-size: 0.55rem; background: rgba(39,201,63,0.2); color: #27c93f; padding: 2px 8px; border-radius: 100px; font-weight: 800; letter-spacing: 2px; }
+        .bi-table { width: 100%; border-collapse: collapse; }
+        .bi-table th { text-align: left; padding: 0.7rem 0.8rem; border-bottom: 1px solid #1a1a1a; color: #444; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; }
+        .bi-table td { padding: 0.9rem 0.8rem; border-bottom: 1px solid #151515; font-size: 0.8rem; }
+        .bi-table tr:last-child td { border: none; }
+        .status-paid { color: #27c93f; font-weight: 700; font-size: 0.7rem; }
+        .status-partial { color: #ffbd2e; font-weight: 700; font-size: 0.7rem; }
+
+        /* WHAT SECTION */
+        .bi-what { padding: 5rem 5%; background: #030303; }
+        .bi-what-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .bi-what-text h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem; }
+        .bi-what-text h2 span { color: var(--primary); }
+        .bi-what-text p { color: rgba(255,255,255,0.5); line-height: 1.8; margin-bottom: 2rem; }
+        .bi-list { list-style: none; }
+        .bi-list li { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; font-size: 0.9rem; }
+        .bi-list li i { color: var(--primary); width: 16px; }
+        .bi-side-stats { display: flex; flex-direction: column; gap: 1.5rem; }
+        .bs-item { background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.15); border-radius: 10px; padding: 1.5rem; }
+        .bs-item .num { font-size: 2rem; font-weight: 900; color: var(--primary); }
+        .bs-item .label { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 0.3rem; }
+
+        .bi-cta { padding: 5rem 5%; text-align: center; background: #050505; border-top: 1px solid rgba(255,255,255,0.05); }
+        .bi-cta h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem; }
+        .bi-cta p { color: rgba(255,255,255,0.5); margin-bottom: 2.5rem; }
+
+        @media (max-width: 1024px) {
+            .bi-body { grid-template-columns: 1fr; }
+            .bi-sidebar { display: none; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .bi-charts { grid-template-columns: 1fr; }
+            .bi-what-inner { grid-template-columns: 1fr; }
+            .demo-progress { display: none; }
+        }
     </style>
 </head>
-<body class="admin-layout">
-    <aside class="admin-sidebar">
-        <div style="font-weight: 900; font-size: 1.4rem; color: var(--primary); margin-bottom: 4rem; text-align: center;">BI DASHBOARD</div>
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-            <div style="background: rgba(197, 160, 89, 0.1); color: var(--primary); padding: 1rem; border-radius: 10px; cursor: pointer;"><i class="fas fa-chart-pie"></i> Vue d'ensemble</div>
-            <div style="padding: 1rem; color: #666;"><i class="fas fa-users"></i> CRM Clients</div>
-            <div style="padding: 1rem; color: #666;"><i class="fas fa-file-invoice-dollar"></i> Rapports de Vente</div>
-            <div style="padding: 1rem; color: #666;"><i class="fas fa-bullhorn"></i> Marketing Ads</div>
-            <div style="padding: 1rem; color: #666;"><i class="fas fa-cog"></i> Paramètres API</div>
-        </div>
-        <div style="margin-top: auto; text-align: center; font-size: 0.7rem; color: #444;">Marina Car BI v4.2</div>
-    </aside>
-
-    <main class="admin-main">
-        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
-            <h2>Business Intelligence <span>Console</span></h2>
-            <div style="background: #222; padding: 10px 20px; border-radius: 30px; font-size: 0.8rem;">Période: Mai 2026 <i class="fas fa-chevron-down"></i></div>
-        </header>
-
-        <div class="dashboard-grid">
-            <div class="stat-box"><h4>Revenus Totaux</h4><div class="val">428,500 <span style="font-size:0.8rem;">DH</span></div><p style="color:#27c93f; font-size:0.7rem; margin-top:5px;">+14.2% vs Avril</p></div>
-            <div class="stat-box"><h4>Réservations</h4><div class="val">84</div><p style="color:#27c93f; font-size:0.7rem; margin-top:5px;">+28 nouvelles</p></div>
-            <div class="stat-box"><h4>Panier Moyen</h4><div class="val">5,100 <span style="font-size:0.8rem;">DH</span></div><p style="color:#ffbd2e; font-size:0.7rem; margin-top:5px;">Stable</p></div>
-            <div class="stat-box"><h4>Taux Reconversion</h4><div class="val">68%</div><p style="color:#27c93f; font-size:0.7rem; margin-top:5px;">+5% vs Mars</p></div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem;">
-            <div class="chart-mock">
-                <h4 style="margin-bottom: 2rem;">Courbe de croissance mensuelle</h4>
-                <div class="chart-bar-container">
-                    <div class="bar" style="height: 40%;" data-val="Jan"></div>
-                    <div class="bar" style="height: 55%;" data-val="Feb"></div>
-                    <div class="bar" style="height: 45%;" data-val="Mar"></div>
-                    <div class="bar" style="height: 70%;" data-val="Apr"></div>
-                    <div class="bar" style="height: 90%;" data-val="May"></div>
-                    <div class="bar" style="height: 65%;" data-val="Jun"></div>
-                </div>
-            </div>
-            <div class="stat-box">
-                <h4 style="margin-bottom: 1.5rem;">Canaux d'Acquisition</h4>
-                <div style="display: flex; flex-direction: column; gap: 15px;">
-                    <div><div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Google Search</span><span>45%</span></div><div style="width:100%; height:5px; background:#222; border-radius:5px; margin-top:5px;"><div style="width:45%; height:100%; background:var(--primary);"></div></div></div>
-                    <div><div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Instagram Ads</span><span>35%</span></div><div style="width:100%; height:5px; background:#222; border-radius:5px; margin-top:5px;"><div style="width:35%; height:100%; background:var(--primary);"></div></div></div>
-                    <div><div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Direct / Referral</span><span>20%</span></div><div style="width:100%; height:5px; background:#222; border-radius:5px; margin-top:5px;"><div style="width:20%; height:100%; background:var(--primary);"></div></div></div>
-                </div>
+<body>
+    <nav class="demo-nav">
+        <div class="demo-nav-left">
+            <div class="demo-nav-logo">Marina Car</div>
+            <div class="demo-module-label">Module 2 / 5</div>
+            <div class="demo-progress">
+                <div class="demo-dot done"></div>
+                <div class="demo-dot active"></div>
+                <div class="demo-dot"></div>
+                <div class="demo-dot"></div>
+                <div class="demo-dot"></div>
             </div>
         </div>
+        <div class="demo-nav-right">
+            <a href="demo_hub.html" class="demo-exit"><i class="fas fa-th-large"></i> Hub</a>
+            <a href="vitrine_demo.html" class="demo-btn demo-btn-prev"><i class="fas fa-arrow-left"></i> Précédent</a>
+            <a href="erp_demo.html" class="demo-btn demo-btn-next">Suivant : Office ERP <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </nav>
 
-        <h3 style="margin-top: 4rem;">Dernières Ventes Premium</h3>
-        <table class="admin-table">
-            <thead>
-                <tr><th>CLIENT</th><th>CATÉGORIE</th><th>PRIX</th><th>SOURCE</th><th>ACTION</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>Mehdi Alami</td><td>Luxe (G-Class)</td><td>12,500 DH</td><td>Mobile App</td><td><button style="color:var(--primary); background:none; border:none; font-weight:800;">Détails</button></td></tr>
-                <tr><td>Fatima Zahra</td><td>SUV Premium</td><td>4,500 DH</td><td>Web Desktop</td><td><button style="color:var(--primary); background:none; border:none; font-weight:800;">Détails</button></td></tr>
-                <tr><td>Youssef K.</td><td>Berline Luxe</td><td>8,400 DH</td><td>Google Ads</td><td><button style="color:var(--primary); background:none; border:none; font-weight:800;">Détails</button></td></tr>
-            </tbody>
-        </table>
-    </main>
+    <!-- HEADER -->
+    <div class="bi-header">
+        <div class="module-badge">Module 02 — Business Intelligence</div>
+        <h1>Pilotez votre Agence en <span>Temps Réel</span></h1>
+        <p>Toutes vos données clés — revenus, réservations, performance — concentrées en un seul tableau de bord interactif.</p>
+    </div>
+
+    <!-- FULL DASHBOARD DEMO -->
+    <div class="bi-dashboard">
+        <div class="bi-dash-header">
+            <h3><i class="fas fa-chart-pie" style="color:var(--primary); margin-right:10px;"></i> Marina Car — Business Intelligence Console</h3>
+            <div class="bi-period">Période : Mai 2026 ▾</div>
+        </div>
+        <div class="bi-body">
+            <div class="bi-sidebar">
+                <div class="bi-sidebar-logo">BI PANEL</div>
+                <div class="bi-nav-item active"><i class="fas fa-chart-pie"></i> Vue d'ensemble</div>
+                <div class="bi-nav-item"><i class="fas fa-users"></i> CRM Clients</div>
+                <div class="bi-nav-item"><i class="fas fa-file-invoice-dollar"></i> Rapports Ventes</div>
+                <div class="bi-nav-item"><i class="fas fa-bullhorn"></i> Marketing</div>
+                <div class="bi-nav-item"><i class="fas fa-download"></i> Export PDF/Excel</div>
+                <div class="bi-nav-item"><i class="fas fa-cog"></i> Paramètres</div>
+            </div>
+            <div class="bi-main">
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Revenus Totaux</div>
+                        <div class="kpi-value">428,500 <span style="font-size:0.8rem; font-weight:400;">DH</span></div>
+                        <div class="kpi-sub">▲ +14.2% vs Avril</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Réservations</div>
+                        <div class="kpi-value">84</div>
+                        <div class="kpi-sub">▲ +28 nouvelles</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Panier Moyen</div>
+                        <div class="kpi-value">5,100 <span style="font-size:0.8rem; font-weight:400;">DH</span></div>
+                        <div class="kpi-sub warn">— Stable</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Taux Retour Client</div>
+                        <div class="kpi-value">68%</div>
+                        <div class="kpi-sub">▲ +5% vs Mars</div>
+                    </div>
+                </div>
+
+                <div class="bi-charts">
+                    <div class="chart-box">
+                        <h4>Évolution des Revenus Mensuels (2026)</h4>
+                        <div class="chart-bars">
+                            <div class="c-bar" style="height:40%"><span class="c-label">Jan</span><span class="c-tip">176K</span></div>
+                            <div class="c-bar" style="height:55%"><span class="c-label">Fév</span><span class="c-tip">240K</span></div>
+                            <div class="c-bar" style="height:45%"><span class="c-label">Mar</span><span class="c-tip">198K</span></div>
+                            <div class="c-bar" style="height:70%"><span class="c-label">Avr</span><span class="c-tip">374K</span></div>
+                            <div class="c-bar peak" style="height:92%"><span class="c-label">Mai</span><span class="c-tip">428K</span></div>
+                            <div class="c-bar" style="height:65%; opacity:0.4;"><span class="c-label">Jun</span><span class="c-tip">Prévu</span></div>
+                        </div>
+                        <div class="c-legend" style="margin-top:32px;">
+                            <div class="c-leg-item"><div class="c-leg-dot" style="background:var(--primary);"></div> Réel</div>
+                            <div class="c-leg-item"><div class="c-leg-dot" style="background:#333;"></div> Prévu</div>
+                        </div>
+                    </div>
+                    <div class="chart-box">
+                        <h4>Canaux d'Acquisition</h4>
+                        <div class="acq-row">
+                            <div class="acq-item">
+                                <div class="acq-header"><span>Google Search</span><span>45%</span></div>
+                                <div class="acq-bar-bg"><div class="acq-bar-fill" style="width:45%;"></div></div>
+                            </div>
+                            <div class="acq-item">
+                                <div class="acq-header"><span>Instagram Ads</span><span>35%</span></div>
+                                <div class="acq-bar-bg"><div class="acq-bar-fill" style="width:35%;"></div></div>
+                            </div>
+                            <div class="acq-item">
+                                <div class="acq-header"><span>Direct / Referral</span><span>12%</span></div>
+                                <div class="acq-bar-bg"><div class="acq-bar-fill" style="width:12%;"></div></div>
+                            </div>
+                            <div class="acq-item">
+                                <div class="acq-header"><span>WhatsApp</span><span>8%</span></div>
+                                <div class="acq-bar-bg"><div class="acq-bar-fill" style="width:8%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bi-table-section">
+                    <h4>Dernières Réservations <span class="live-badge">LIVE</span></h4>
+                    <table class="bi-table">
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Véhicule</th>
+                                <th>Période</th>
+                                <th>Montant</th>
+                                <th>Canal</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mehdi Alami</td>
+                                <td>Mercedes G-Class</td>
+                                <td>01–08 Mai</td>
+                                <td style="color:var(--primary); font-weight:700;">12,500 DH</td>
+                                <td>Google</td>
+                                <td><span class="status-paid">✔ PAYÉ</span></td>
+                            </tr>
+                            <tr>
+                                <td>Fatima Zahra</td>
+                                <td>Range Rover Evoque</td>
+                                <td>04–06 Mai</td>
+                                <td style="color:var(--primary); font-weight:700;">4,500 DH</td>
+                                <td>Instagram</td>
+                                <td><span class="status-partial">◕ PARTIEL</span></td>
+                            </tr>
+                            <tr>
+                                <td>Youssef K.</td>
+                                <td>VW Golf 8</td>
+                                <td>05–07 Mai</td>
+                                <td style="color:var(--primary); font-weight:700;">2,800 DH</td>
+                                <td>Direct</td>
+                                <td><span class="status-paid">✔ PAYÉ</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHAT CLIENT GETS -->
+    <div class="bi-what">
+        <div class="bi-what-inner">
+            <div class="bi-what-text">
+                <h2>Pilotez avec <span>Intelligence</span></h2>
+                <p>Fini les tableaux Excel et les calculs manuels. Votre dashboard vous donne une vision claire et instantanée de votre business.</p>
+                <ul class="bi-list">
+                    <li><i class="fas fa-check"></i> KPIs en temps réel (revenus, taux d'occupation)</li>
+                    <li><i class="fas fa-check"></i> Graphiques de croissance mensuelle</li>
+                    <li><i class="fas fa-check"></i> Analyse des canaux d'acquisition clients</li>
+                    <li><i class="fas fa-check"></i> Historique complet des réservations</li>
+                    <li><i class="fas fa-check"></i> Export des rapports PDF / Excel en 1 clic</li>
+                    <li><i class="fas fa-check"></i> CRM clients intégré</li>
+                </ul>
+            </div>
+            <div class="bi-side-stats">
+                <div class="bs-item">
+                    <div class="num">+28%</div>
+                    <div class="label">Réservations supplémentaires grâce à la visibilité digitale</div>
+                </div>
+                <div class="bs-item">
+                    <div class="num">100%</div>
+                    <div class="label">Données centralisées, accessibles partout, en temps réel</div>
+                </div>
+                <div class="bs-item">
+                    <div class="num">0 h</div>
+                    <div class="label">De temps perdu en calculs manuels ou reporting papier</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA NEXT -->
+    <section class="bi-cta">
+        <h2>Impressionné ?</h2>
+        <p>Passez maintenant à l'Office ERP — la gestion complète de vos contrats et de votre flotte. Module 3/5</p>
+        <a href="erp_demo.html" class="cta-button">
+            Module Suivant : Office ERP <i class="fas fa-arrow-right"></i>
+        </a>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>

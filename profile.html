@@ -3,91 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espace Client | Marina Car</title>
+    <title>Module 5 – Espace Client | Marina Car Demo</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .demo-nav { position:fixed;top:0;left:0;width:100%;background:rgba(5,5,5,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,175,55,0.2);z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px; }
+        .demo-nav-left { display:flex;align-items:center;gap:1.5rem; }
+        .demo-nav-logo { font-weight:900;color:var(--primary);font-size:1.1rem;letter-spacing:2px; }
+        .demo-progress { display:flex;align-items:center;gap:0.5rem; }
+        .demo-dot { width:28px;height:4px;border-radius:2px;background:rgba(255,255,255,0.1);transition:all 0.3s; }
+        .demo-dot.done { background:rgba(212,175,55,0.4); }
+        .demo-dot.active { background:var(--primary); }
+        .demo-module-label { font-size:0.7rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary); }
+        .demo-nav-right { display:flex;align-items:center;gap:1rem; }
+        .demo-btn { padding:0.6rem 1.4rem;border-radius:2px;font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s; }
+        .demo-btn-prev { background:transparent;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5); }
+        .demo-btn-prev:hover { border-color:rgba(255,255,255,0.4);color:#fff; }
+        .demo-btn-finish { background:var(--primary);border:1px solid var(--primary);color:#000; }
+        .demo-btn-finish:hover { background:var(--primary-bright);transform:translateY(-2px); }
+        .demo-exit { font-size:0.7rem;color:rgba(255,255,255,0.3);text-decoration:none;padding:0.4rem 0.8rem;transition:color 0.3s; }
+        .demo-exit:hover { color:rgba(255,255,255,0.7); }
+
+        body { background:#050505;color:#fff;padding-top:64px;font-family:'Outfit',sans-serif;min-height:100vh; }
+
+        /* INTRO */
+        .client-intro { padding:4rem 5% 3rem;text-align:center;background:linear-gradient(to bottom,#0a0a0a,#050505); }
+        .client-badge { display:inline-block;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);color:var(--primary);padding:0.4rem 1.2rem;border-radius:100px;font-size:0.65rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;margin-bottom:1.5rem; }
+        .client-intro h1 { font-size:clamp(2.5rem,5vw,4rem);font-weight:800;margin-bottom:1rem; }
+        .client-intro h1 span { color:var(--primary); }
+        .client-intro p { color:rgba(255,255,255,0.5);max-width:600px;margin:0 auto;font-size:1rem;line-height:1.8; }
+
+        /* CLIENT PORTAL */
+        .client-portal {
+            margin: 2rem 5%;
+            display: grid; grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        /* SIDEBAR */
+        .cp-sidebar {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px; padding: 2rem;
+            height: fit-content;
+        }
+        .cp-avatar { text-align:center;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--glass-border); }
+        .cp-avatar-img { width:80px;height:80px;background:linear-gradient(135deg,rgba(212,175,55,0.3),rgba(212,175,55,0.1));border-radius:50%;margin:0 auto 1rem;border:2px solid var(--primary);display:flex;align-items:center;justify-content:center; }
+        .cp-avatar-img i { font-size:1.8rem;color:var(--primary); }
+        .cp-name { font-weight:800;font-size:1.1rem;margin-bottom:0.3rem; }
+        .cp-tier { display:inline-block;font-size:0.65rem;font-weight:800;letter-spacing:3px;color:var(--primary);background:rgba(212,175,55,0.1);padding:3px 10px;border-radius:100px; }
+        .cp-nav-item { display:flex;align-items:center;gap:12px;padding:0.9rem 1rem;border-radius:8px;font-size:0.85rem;color:rgba(255,255,255,0.4);cursor:pointer;transition:0.3s;margin-bottom:0.2rem; }
+        .cp-nav-item.active { background:rgba(212,175,55,0.1);color:var(--primary);font-weight:700; }
+        .cp-nav-item:hover { background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.7); }
+        .cp-nav-item i { width:18px; }
+        .cp-logout { color:#ff5f56 !important;margin-top:1.5rem; }
+
+        /* MAIN CONTENT */
+        .cp-main { display:flex;flex-direction:column;gap:2rem; }
+
+        .cp-greeting { font-size:1.8rem;font-weight:800;margin-bottom:0.5rem; }
+        .cp-greeting span { color:var(--primary); }
+
+        /* SUMMARY CARDS */
+        .cp-summary { display:grid;grid-template-columns:1fr 1fr;gap:1.5rem; }
+        .cp-sum-card { background:var(--card-bg);border:1px solid var(--glass-border);border-radius:12px;padding:1.5rem; }
+        .cp-sum-card.gold { background:linear-gradient(135deg,rgba(212,175,55,0.1),rgba(212,175,55,0.03));border-color:rgba(212,175,55,0.3); }
+        .cp-sum-title { font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;margin-bottom:0.8rem; }
+        .cp-sum-title.gold { color:var(--primary); }
+        .cp-sum-title.muted { color:rgba(255,255,255,0.4); }
+        .cp-sum-value { font-size:1.6rem;font-weight:900;margin-bottom:0.3rem; }
+        .cp-sum-sub { font-size:0.75rem;color:rgba(255,255,255,0.4); }
+
+        /* ACTIVE RENTAL */
+        .cp-section { background:var(--card-bg);border:1px solid var(--glass-border);border-radius:12px;padding:2rem; }
+        .cp-section-title { font-size:1rem;font-weight:800;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px; }
+        .cp-section-title i { color:var(--primary); }
+
+        .active-rental { display:grid;grid-template-columns:200px 1fr;gap:2rem;align-items:center; }
+        .active-rental img { width:100%;border-radius:10px;background:#111;object-fit:contain;padding:10px; }
+        .active-rental-info { }
+        .active-rental-name { font-size:1.3rem;font-weight:800;margin-bottom:0.5rem; }
+        .active-rental-tag { display:inline-block;background:rgba(39,201,63,0.1);color:#27c93f;font-size:0.65rem;font-weight:800;letter-spacing:2px;padding:3px 10px;border-radius:100px;margin-bottom:1rem; }
+        .rental-details { display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem; }
+        .rental-detail { font-size:0.85rem;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:10px; }
+        .rental-detail i { color:var(--primary);width:14px; }
+
+        /* PROGRESS BAR */
+        .rental-progress { margin-bottom:1.5rem; }
+        .rental-progress-label { display:flex;justify-content:space-between;font-size:0.7rem;color:rgba(255,255,255,0.4);margin-bottom:8px; }
+        .rental-progress-bar { height:6px;background:rgba(255,255,255,0.06);border-radius:3px; }
+        .rental-progress-fill { height:100%;background:var(--primary);border-radius:3px; }
+
+        /* HISTORY TABLE */
+        .history-table { width:100%;border-collapse:collapse; }
+        .history-table th { text-align:left;padding:0.7rem 0.8rem;border-bottom:1px solid var(--glass-border);color:rgba(255,255,255,0.3);font-size:0.65rem;text-transform:uppercase;letter-spacing:1px; }
+        .history-table td { padding:1rem 0.8rem;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem; }
+        .history-table tr:last-child td { border:none; }
+        .status-chip { display:inline-block;padding:3px 10px;border-radius:100px;font-size:0.6rem;font-weight:800; }
+        .chip-green { background:rgba(39,201,63,0.1);color:#27c93f; }
+        .chip-gold { background:rgba(212,175,55,0.1);color:var(--primary); }
+        .pay-btn { display:inline-flex;align-items:center;gap:6px;padding:0.4rem 0.9rem;background:var(--primary);color:#000;border:none;border-radius:4px;font-size:0.7rem;font-weight:800;cursor:pointer;text-decoration:none;transition:0.3s; }
+        .pay-btn:hover { background:var(--primary-bright);transform:translateY(-1px); }
+
+        /* WHAT CLIENT GETS */
+        .cp-what { padding:5rem 5%;background:#030303; }
+        .cp-what-inner { max-width:1000px;margin:0 auto; }
+        .cp-what-inner h2 { font-size:2.2rem;font-weight:800;margin-bottom:1rem;text-align:center; }
+        .cp-what-inner h2 span { color:var(--primary); }
+        .cp-what-inner > p { color:rgba(255,255,255,0.5);text-align:center;margin-bottom:3rem;line-height:1.8; }
+        .cp-features { display:grid;grid-template-columns:repeat(3,1fr);gap:2rem; }
+        .cp-feat { text-align:center;padding:2rem;background:rgba(255,255,255,0.02);border:1px solid var(--glass-border);border-radius:12px; }
+        .cp-feat i { font-size:1.8rem;color:var(--primary);margin-bottom:1rem;display:block; }
+        .cp-feat h4 { font-size:0.95rem;font-weight:800;margin-bottom:0.5rem; }
+        .cp-feat p { font-size:0.8rem;color:rgba(255,255,255,0.4);margin:0; }
+
+        /* FINAL CTA */
+        .cp-final { padding:5rem 5%;text-align:center;background:#050505;border-top:1px solid var(--glass-border); }
+        .cp-final .badge-complete { display:inline-block;background:rgba(39,201,63,0.1);border:1px solid rgba(39,201,63,0.3);color:#27c93f;padding:0.5rem 1.5rem;border-radius:100px;font-size:0.7rem;font-weight:800;letter-spacing:3px;margin-bottom:2rem; }
+        .cp-final h2 { font-size:2.8rem;font-weight:800;margin-bottom:1rem; }
+        .cp-final h2 span { color:var(--primary); }
+        .cp-final p { color:rgba(255,255,255,0.5);max-width:600px;margin:0 auto 3rem;line-height:1.8; }
+        .cp-final-btns { display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap; }
+        .btn-outline { padding:1.2rem 2.5rem;background:transparent;border:1px solid rgba(212,175,55,0.5);color:var(--primary);border-radius:2px;font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:2px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all 0.4s ease; }
+        .btn-outline:hover { background:rgba(212,175,55,0.1);border-color:var(--primary);transform:translateY(-3px); }
+
+        @media(max-width:1024px){
+            .client-portal { grid-template-columns:1fr; }
+            .cp-sidebar { display:none; }
+            .cp-summary,.active-rental { grid-template-columns:1fr; }
+            .cp-features { grid-template-columns:1fr 1fr; }
+            .demo-progress { display:none; }
+        }
+        @media(max-width:600px){ .cp-features { grid-template-columns:1fr; } }
+    </style>
 </head>
-<body class="demo-body-dark">
-    <nav>
-        <div class="logo">Marina Car</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="solutions.html">Solutions</a></li>
-        </ul>
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 0.8rem;">M. Ahmed</span>
-            <div style="width: 35px; height: 35px; background: var(--primary); border-radius: 50%;"></div>
+<body>
+    <nav class="demo-nav">
+        <div class="demo-nav-left">
+            <div class="demo-nav-logo">Marina Car</div>
+            <div class="demo-module-label">Module 5 / 5</div>
+            <div class="demo-progress">
+                <div class="demo-dot done"></div>
+                <div class="demo-dot done"></div>
+                <div class="demo-dot done"></div>
+                <div class="demo-dot done"></div>
+                <div class="demo-dot active"></div>
+            </div>
+        </div>
+        <div class="demo-nav-right">
+            <a href="demo_hub.html" class="demo-exit"><i class="fas fa-th-large"></i> Hub</a>
+            <a href="gps_demo.html" class="demo-btn demo-btn-prev"><i class="fas fa-arrow-left"></i> Précédent</a>
+            <a href="demo_hub.html" class="demo-btn demo-btn-finish">✓ Terminer la Visite</a>
         </div>
     </nav>
 
-    <div class="demo-container-luxe">
-        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem;">
-            <aside class="mock-sidebar">
-                <div style="text-align: center; margin-bottom: 2rem; border-bottom: 1px solid #222; padding-bottom: 2rem;">
-                    <div style="width: 80px; height: 80px; background: #222; border-radius: 50%; margin: 0 auto 1rem; border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-user" style="font-size: 2rem; color: var(--primary);"></i>
-                    </div>
-                    <h4 style="margin:0;">Ahmed Mansouri</h4>
-                    <span style="font-size: 0.7rem; color: var(--primary);">MEMBRE GOLD</span>
-                </div>
-                <div class="mock-sidebar-item active"><i class="fas fa-car"></i> Mes Locations</div>
-                <div class="mock-sidebar-item"><i class="fas fa-credit-card"></i> Paiement</div>
-                <div class="mock-sidebar-item"><i class="fas fa-heart"></i> Mes Favoris</div>
-                <div class="mock-sidebar-item"><i class="fas fa-cog"></i> Paramètres</div>
-                <div class="mock-sidebar-item" style="margin-top: 3rem; color: #ff5f56;"><i class="fas fa-sign-out-alt"></i> Déconnexion</div>
-            </aside>
+    <div class="client-intro">
+        <div class="client-badge">Module 05 — Espace Client</div>
+        <h1>L'Expérience de votre <span>Locataire</span></h1>
+        <p>Vos clients accèdent à un portail personnel pour gérer leurs locations, consulter leurs contrats et effectuer leurs paiements facilement.</p>
+    </div>
 
-            <main>
-                <h2 style="margin-bottom: 2rem;">Bonjour, Ahmed !</h2>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
-                    <div style="background: linear-gradient(45deg, #c5a05933, transparent); padding: 2rem; border-radius: 15px; border: 1px solid #c5a05955;">
-                        <h4 style="color:var(--primary); margin-bottom:0.5rem;">Statut VIP : Gold</h4>
-                        <p style="font-size:0.8rem; color:#aaa;">Profitez de -15% sur votre prochaine réservation !</p>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.03); padding: 2rem; border-radius: 15px; border: 1px solid #333;">
-                        <h4 style="margin-bottom:1rem;"><i class="fas fa-credit-card" style="color:var(--primary);"></i> Mode de Paiement</h4>
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <i class="fab fa-cc-visa" style="font-size: 2rem; color: #fff;"></i>
-                            <div>
-                                <p style="font-size:0.9rem; font-weight: 700;">Visa **** 4421</p>
-                                <p style="font-size:0.7rem; color:#666;">Expire le 12/28</p>
+    <!-- CLIENT PORTAL -->
+    <div class="client-portal">
+        <!-- SIDEBAR -->
+        <div class="cp-sidebar">
+            <div class="cp-avatar">
+                <div class="cp-avatar-img"><i class="fas fa-user"></i></div>
+                <div class="cp-name">Ahmed Mansouri</div>
+                <span class="cp-tier">MEMBRE GOLD</span>
+            </div>
+            <div class="cp-nav-item active"><i class="fas fa-car"></i> Mes Locations</div>
+            <div class="cp-nav-item"><i class="fas fa-file-contract"></i> Mes Contrats</div>
+            <div class="cp-nav-item"><i class="fas fa-credit-card"></i> Paiements</div>
+            <div class="cp-nav-item"><i class="fas fa-heart"></i> Favoris</div>
+            <div class="cp-nav-item"><i class="fas fa-bell"></i> Notifications</div>
+            <div class="cp-nav-item"><i class="fas fa-cog"></i> Paramètres</div>
+            <div class="cp-nav-item cp-logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</div>
+        </div>
+
+        <!-- MAIN -->
+        <div class="cp-main">
+            <div>
+                <div class="cp-greeting">Bonjour, <span>Ahmed</span> 👋</div>
+                <p style="color:rgba(255,255,255,0.4);font-size:0.9rem;">Mercredi 7 Mai 2026 — Membre Gold depuis 2 ans</p>
+            </div>
+
+            <div class="cp-summary">
+                <div class="cp-sum-card gold">
+                    <div class="cp-sum-title gold">Statut VIP</div>
+                    <div class="cp-sum-value">Gold ★</div>
+                    <div class="cp-sum-sub">−15% sur votre prochaine réservation</div>
+                </div>
+                <div class="cp-sum-card">
+                    <div class="cp-sum-title muted">Total Locations</div>
+                    <div class="cp-sum-value">12</div>
+                    <div class="cp-sum-sub">depuis votre inscription</div>
+                </div>
+            </div>
+
+            <!-- ACTIVE RENTAL -->
+            <div class="cp-section">
+                <div class="cp-section-title"><i class="fas fa-car"></i> Location en Cours</div>
+                <div class="active-rental">
+                    <img src="assets/cars/volkswagen/golf-8/main.png" alt="Golf 8">
+                    <div class="active-rental-info">
+                        <div class="active-rental-name">Volkswagen Golf 8</div>
+                        <div class="active-rental-tag">✔ LOCATION ACTIVE</div>
+                        <div class="rental-details">
+                            <div class="rental-detail"><i class="fas fa-calendar-alt"></i> Retour : 10 Mai 2026 — Rabat Marina</div>
+                            <div class="rental-detail"><i class="fas fa-file-contract"></i> Contrat : #MC-2026-083</div>
+                            <div class="rental-detail"><i class="fas fa-gas-pump"></i> Carburant : 78%</div>
+                        </div>
+                        <div class="rental-progress">
+                            <div class="rental-progress-label">
+                                <span>04 Mai</span>
+                                <span>3 jours restants</span>
+                                <span>10 Mai</span>
+                            </div>
+                            <div class="rental-progress-bar">
+                                <div class="rental-progress-fill" style="width:57%;"></div>
                             </div>
                         </div>
-                        <button style="background: none; border: none; color: var(--primary); font-size: 0.7rem; padding: 0; margin-top: 15px; cursor: pointer; text-decoration: underline;">Modifier la carte</button>
+                        <a href="payment.html" class="pay-btn"><i class="fas fa-credit-card"></i> Régler le Solde Restant</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="demo-card" style="margin-bottom: 2rem;">
-                    <h3 style="margin-bottom: 1.5rem;">Location en cours</h3>
-                    <div style="display: flex; gap: 2rem; align-items: center;">
-                        <img src="assets/cars/volkswagen/golf-8/main.png" alt="Golf 8" style="width: 200px; border-radius: 10px;">
-                        <div style="flex: 1;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                                <h4 style="margin:0;">Volkswagen Golf 8</h4>
-                                <span class="erp-tag erp-tag-success">ACTIVE</span>
-                            </div>
-                            <p style="font-size: 0.85rem; color: #888; margin-bottom: 0.5rem;"><i class="fas fa-calendar-alt"></i> Retour: 10 Mai 2026 (Rabat Marina)</p>
-                            <p style="font-size: 0.85rem; color: #888;"><i class="fas fa-gas-pump"></i> Niveau carburant: 85%</p>
-                        </div>
-                    </div>
-                </div>
-
-                <h3>Historique des Réservations</h3>
-                <div class="demo-card" style="padding: 1.5rem; margin-top: 1.5rem; opacity: 0.7;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <h4 style="margin: 0 0 0.5rem;">Range Rover Sport</h4>
-                            <span style="font-size: 0.75rem; color: #666;">12 Avril - 15 Avril 2026</span>
-                        </div>
-                        <div style="text-align: right;">
-                            <p style="font-weight: 700; color: var(--primary);">8,400 MAD</p>
-                            <span style="font-size: 0.7rem;">Facture #RC-884</span>
-                        </div>
-                    </div>
-                </div>
-            </main>
+            <!-- HISTORY -->
+            <div class="cp-section">
+                <div class="cp-section-title"><i class="fas fa-history"></i> Historique des Réservations</div>
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Véhicule</th>
+                            <th>Période</th>
+                            <th>Montant</th>
+                            <th>Statut</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Range Rover Evoque</strong></td>
+                            <td>12 — 15 Avril 2026</td>
+                            <td style="color:var(--primary);font-weight:700;">8,400 MAD</td>
+                            <td><span class="status-chip chip-green">✔ SOLDÉ</span></td>
+                            <td><a class="pay-btn" onclick="alert('Contrat disponible en téléchargement PDF.')"><i class="fas fa-download"></i> PDF</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mercedes G-Class</strong></td>
+                            <td>20 — 25 Février 2026</td>
+                            <td style="color:var(--primary);font-weight:700;">12,500 MAD</td>
+                            <td><span class="status-chip chip-green">✔ SOLDÉ</span></td>
+                            <td><a class="pay-btn" onclick="alert('Contrat disponible en téléchargement PDF.')"><i class="fas fa-download"></i> PDF</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Volkswagen Golf 8</strong></td>
+                            <td>04 — 10 Mai 2026</td>
+                            <td style="color:var(--primary);font-weight:700;">2,800 MAD</td>
+                            <td><span class="status-chip chip-gold">◕ EN COURS</span></td>
+                            <td><a href="payment.html" class="pay-btn"><i class="fas fa-credit-card"></i> Payer</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
+    <!-- WHAT CLIENT GETS -->
+    <div class="cp-what">
+        <div class="cp-what-inner">
+            <h2>Ce que vivent vos <span>Clients</span></h2>
+            <p>Un portail personnel moderne renforce la confiance et fidélise vos clients. Ils reviennent parce que l'expérience est fluide et professionnelle.</p>
+            <div class="cp-features">
+                <div class="cp-feat">
+                    <i class="fas fa-user-circle"></i>
+                    <h4>Espace Personnel</h4>
+                    <p>Chaque client dispose d'un compte sécurisé avec tout son historique</p>
+                </div>
+                <div class="cp-feat">
+                    <i class="fas fa-file-pdf"></i>
+                    <h4>Contrats Accessibles</h4>
+                    <p>Téléchargement PDF des contrats signés à tout moment</p>
+                </div>
+                <div class="cp-feat">
+                    <i class="fas fa-credit-card"></i>
+                    <h4>Paiement Intégré</h4>
+                    <p>Règlement du solde directement depuis l'espace client</p>
+                </div>
+                <div class="cp-feat">
+                    <i class="fas fa-star"></i>
+                    <h4>Programme Fidélité</h4>
+                    <p>Niveaux VIP (Silver, Gold, Platinum) pour récompenser vos clients réguliers</p>
+                </div>
+                <div class="cp-feat">
+                    <i class="fas fa-bell"></i>
+                    <h4>Notifications</h4>
+                    <p>Rappels automatiques de retour, confirmations et promotions</p>
+                </div>
+                <div class="cp-feat">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Mobile-First</h4>
+                    <p>Interface optimisée pour une utilisation depuis smartphone</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINAL CTA -->
+    <div class="cp-final">
+        <div class="badge-complete">✓ VISITE COMPLÈTE — 5/5 MODULES</div>
+        <h2>Vous avez tout vu.<br>Passons à <span>l'Action</span>.</h2>
+        <p>Vous avez découvert les 5 piliers de l'écosystème Marina Car. Choisissez le pack adapté à votre agence et nous lançons le projet sous 48h.</p>
+        <div class="cp-final-btns">
+            <a href="index.html#pricing" class="cta-button">
+                <i class="fas fa-rocket"></i> Voir les Offres & Tarifs
+            </a>
+            <a href="index.html#contact" class="btn-outline">
+                <i class="fas fa-phone-alt"></i> Prendre un RDV
+            </a>
+            <a href="demo_hub.html" class="btn-outline">
+                <i class="fas fa-redo"></i> Revoir les Démos
+            </a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
