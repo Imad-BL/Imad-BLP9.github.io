@@ -40,3 +40,22 @@ This repository showcases a production-grade software suite consisting of 5 core
     └── profile.html    # Module 5: Client Portal
 ```
 
+## 🚀 Deployment
+
+This project is a static frontend ecosystem. It is optimized for high-performance delivery on platforms like **Netlify**, **Vercel**, or **GitHub Pages**.
+
+## 👨‍💻 Developed by BOULOUIZ IMAD
+
+**Freelancer & Future Engineer — Expert Full-Stack & CyberSec**
+
+Dedicated to architecting robust digital solutions for the Morocco 2030 vision. 
+- **Stack**: Laravel, Node.js, Python, Vanilla JS, CSS3 (BEM).
+- **Security**: OWASP Standards, DevSecOps, System Hardening.
+
+## 📄 License & Intellectual Property
+
+This project is protected by copyright. **All Rights Reserved**. 
+Viewing the source code is permitted for portfolio evaluation. Redistribution, commercial use, or modification is strictly prohibited without explicit permission. See the [LICENSE](LICENSE) file for more details.
+
+---
+*Propulsé par l'innovation. Vision 2030.*

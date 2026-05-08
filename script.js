@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
 
     /* ═══════════════════════════════
        1. SCROLL PROGRESS BAR
