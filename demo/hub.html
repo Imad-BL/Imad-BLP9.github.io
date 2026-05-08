@@ -14,8 +14,9 @@
             border-bottom: 1px solid rgba(0,0,0,0.08);
             padding: 0.6rem 5%;
             display: flex; align-items: center; justify-content: space-between;
-            gap: 1rem; flex-wrap: wrap;
+            gap: 1rem; flex-wrap: nowrap;
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            overflow-x: auto;
         }
         .dcb-left {
             display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
@@ -175,10 +176,30 @@
         .ind-chip i { font-size: 1.5rem; color: var(--primary); }
         .ind-chip span { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; white-space: nowrap; }
 
+        @media (max-width: 900px) {
+            .demo-customize-bar {
+                justify-content: flex-start;
+                padding: 0.5rem 1rem;
+            }
+            .dcb-right { display: none; }
+            .dcb-label { font-size: 0.6rem; letter-spacing: 1px; }
+            .dcb-input { width: 150px; padding: 0.4rem 0.8rem; }
+            #mainNav { top: 50px !important; }
+            body { padding-top: calc(50px + 60px) !important; }
+        }
+
         @media (max-width: 768px) {
+            .hub-hero { min-height: 80vh; padding-top: 2rem; }
+            .hub-hero h1 { font-size: 2.5rem; }
+            .hero-cta-group .cta-button, .hero-cta-group .btn-outline {
+                width: 100%; justify-content: center;
+            }
+            .modules-grid { grid-template-columns: 1fr; }
             .steps-flow { gap: 1rem; }
+            .step-item { min-width: 100px; }
             .step-item::after { display: none; }
-            .dcb-left { flex-direction: column; align-items: flex-start; }
+            .industries-grid { gap: 1rem; }
+            .ind-chip { padding: 1rem; flex: 1 1 120px; }
         }
     </style>
 </head>
@@ -203,8 +224,11 @@
         <div class="dcb-right"><i class="fas fa-eye"></i> &nbsp;MODE DÉMO — Aucune donnée réelle</div>
     </div>
 
-    <nav id="mainNav" class="scrolled" style="padding: 1.2rem 5%;">
-        <div class="logo" id="navLogo">Rental-Car</div>
+    <nav id="mainNav" class="scrolled" style="padding: 0.8rem 5%;">
+        <div class="logo" id="navLogo" style="display: flex; align-items: center; gap: 8px;">
+            <img src="../assets/bi-logo.png" alt="BI Logo" style="height: 30px; width: auto;">
+            <span>Rental-Car</span>
+        </div>
         <ul class="nav-links">
             <li><a href="../index.html">Accueil</a></li>
             <li><a href="../index.html#pricing">Solutions</a></li>

@@ -40,16 +40,3 @@ This repository showcases a production-grade software suite consisting of 5 core
     └── profile.html    # Module 5: Client Portal
 ```
 
-## 🚀 Deployment
-
-This project is a static frontend ecosystem. Deploy instantly on:
-- **GitHub Pages**
-- **Netlify**
-- **Vercel**
-
-## 👨‍💻 Developed by Rental-Car Team
-
-Focused on delivering premium software solutions for the Morocco 2030 World Cup.
-
----
-*Excellence in Motion — Prepare for 2030.*

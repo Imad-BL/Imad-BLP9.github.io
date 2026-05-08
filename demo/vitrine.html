@@ -19,9 +19,10 @@
             display: flex; align-items: center; justify-content: space-between;
             height: 64px;
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            overflow-x: auto;
         }
         .demo-nav-left { display: flex; align-items: center; gap: 1.5rem; }
-        .demo-nav-logo { font-weight: 900; color: var(--primary); font-size: 1.1rem; letter-spacing: 2px; }
+        .demo-nav-logo { display: flex; align-items: center; gap: 8px; font-weight: 900; color: var(--primary); font-size: 1.1rem; letter-spacing: 2px; }
         .demo-progress { display: flex; align-items: center; gap: 0.5rem; }
         .demo-dot {
             width: 28px; height: 4px; border-radius: 2px;
@@ -176,6 +177,7 @@
             .vit-what { grid-template-columns: 1fr; gap: 2rem; }
             .gal-item:nth-child(2) { margin-top: 0; }
             .demo-progress { display: none; }
+            .demo-nav-right .demo-btn span { display: none; }
         }
     </style>
 </head>
@@ -184,7 +186,10 @@
     <!-- DEMO NAVIGATION -->
     <nav class="demo-nav">
         <div class="demo-nav-left">
-            <div class="demo-nav-logo demo-client-name">Votre Agence</div>
+            <div class="demo-nav-logo">
+                <img src="../assets/bi-logo.png" alt="BI Logo" style="height: 24px; width: auto;">
+                <span id="clientNameNav">Rental-Car</span>
+            </div>
             <div class="demo-module-label">Module 1 / 5</div>
             <div class="demo-progress">
                 <div class="demo-dot active" title="Vitrine Luxe"></div>

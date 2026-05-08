@@ -12,7 +12,10 @@
 </head>
 <body>
     <nav id="mainNav">
-        <div class="logo">Rental-Car</div>
+        <div class="logo" style="display: flex; align-items: center; gap: 5px;">
+            <img src="assets/bi-logo.png" alt="BI Logo" class="bi-logo-nav">
+            <span>Rental-Car</span>
+        </div>
         <ul class="nav-links">
             <li><a href="#home">Accueil</a></li>
             <li><a href="#pricing">Solutions</a></li>
@@ -377,14 +380,52 @@
         </div>
     </section>
 
+    <!-- DEVELOPER SECTION -->
+    <section class="tech-grid" id="about" style="padding: 8rem 5%; background: #fdfdfd; border-top: 1px solid var(--glass-border);">
+        <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;">
+            <div class="animate">
+                <div class="developer-tag">Expert CyberSec <span>&bull; Full-Stack</span></div>
+                <h2 style="font-size: 2.8rem; font-weight: 900; margin-bottom: 1.5rem; line-height: 1.1;">BOULOUIZ <span style="color: var(--primary);">IMAD</span></h2>
+                <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.8;">
+                    Futur Ingénieur en Informatique & Cybersécurité (EMSI Rabat). Je conçois des écosystèmes digitaux sécurisés et innovants, fusionnant la puissance **Full-Stack** et la rigueur de la **Cybersécurité**.
+                </p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 2.5rem;">
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 600;">
+                        <i class="fas fa-shield-alt" style="color: var(--primary);"></i> Security by Design
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 600;">
+                        <i class="fas fa-code" style="color: var(--primary);"></i> Laravel & Node.js
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 600;">
+                        <i class="fas fa-server" style="color: var(--primary);"></i> Linux & DevSecOps
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 600;">
+                        <i class="fas fa-mobile-alt" style="color: var(--primary);"></i> Mobile First
+                    </div>
+                </div>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <a href="https://github.com/Imad-BL" class="cta-button" style="background: var(--text); padding: 0.9rem 2rem; font-size: 0.75rem;"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="BOULOUIZ_IMAD_CVFR.pdf" target="_blank" class="cta-button" style="background: transparent; border: 1px solid var(--primary); color: var(--primary); padding: 0.9rem 2rem; font-size: 0.75rem;"><i class="fas fa-file-pdf"></i> Voir CV</a>
+                </div>
+            </div>
+            <div class="animate" style="text-align: center; position: relative;">
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 350px; height: 350px; background: var(--primary); opacity: 0.05; border-radius: 50%; filter: blur(50px);"></div>
+                <img src="assets/bi-logo.png" alt="BI Logo Large" style="width: 280px; height: auto; filter: drop-shadow(0 30px 60px rgba(255,107,0,0.3)); position: relative; z-index: 2;">
+            </div>
+        </div>
+    </section>
+
     <footer>
-        <div class="footer-logo">Rental-Car</div>
+        <div class="footer-logo" style="display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 1.5rem; font-weight: 900; letter-spacing: 2px;">
+            <img src="assets/bi-logo.png" alt="BI Logo" style="height: 35px; opacity: 0.9;">
+            Rental-Car
+        </div>
         <div class="social-links">
             <a href="#"><i class="fab fa-instagram"></i></a>
             <a href="#"><i class="fab fa-linkedin"></i></a>
             <a href="#"><i class="fab fa-whatsapp"></i></a>
         </div>
-        <p class="copyright">&copy; 2026 Rental-Car 2030 — Solutions Digitales. Tous droits réservés.</p>
+        <p class="copyright">Développé avec passion par **BOULOUIZ IMAD** &copy; 2026. Future Engineer & Freelancer.</p>
     </footer>
 
     <div class="modal" id="carModal">
@@ -412,6 +453,4 @@
 
     <script src="script.js"></script>
 </body>
-
-<!-- Last update: 2026-05-06 23:39 -->
 </html>
