@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
        1. SCROLL PROGRESS BAR
     ═══════════════════════════════ */
     const progressBar = document.createElement('div');
-    progressBar.style.cssText = `position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#d4af37,#f1d279);z-index:9999;width:0%;transition:width 0.1s;`;
+    progressBar.style.cssText = `position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg, var(--morocco-red), var(--morocco-green));z-index:9999;width:0%;transition:width 0.1s;`;
     document.body.appendChild(progressBar);
     window.addEventListener('scroll', () => {
         const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
@@ -31,11 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenu.innerHTML = `
             <button id="closeMenu" style="position:absolute;top:2rem;right:5%;background:transparent;border:none;color:#fff;font-size:2rem;cursor:pointer;"><i class="fas fa-times"></i></button>
             <a href="#home" class="mob-link">Accueil</a>
-            <a href="#fleet" class="mob-link">La Flotte</a>
-            <a href="#pricing" class="mob-link">Solutions</a>
-            <a href="demo_hub.html" class="mob-link">Showroom</a>
+            <a href="#fleet" class="mob-link">Expérience</a>
+            <a href="#pricing" class="mob-link">Solutions 2030</a>
+            <a href="demo/hub.html" class="mob-link">Démo Live</a>
             <a href="#contact" class="mob-link">Contact</a>
-            <a href="#contact" style="margin-top:1rem;padding:1rem 2.5rem;background:var(--primary);color:#000;font-weight:800;font-size:0.9rem;text-decoration:none;letter-spacing:2px;text-transform:uppercase;">Réserver</a>
+            <a href="#contact" style="margin-top:1rem;padding:1rem 2.5rem;background:var(--morocco-red);color:#fff;font-weight:800;font-size:0.9rem;text-decoration:none;letter-spacing:2px;text-transform:uppercase;">Démarrer</a>
         `;
         document.body.appendChild(mobileMenu);
 
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ═══════════════════════════════ */
     const typeTarget = document.getElementById('typeText');
     if (typeTarget) {
-        const words = ['Mouvement', 'Excellence', 'Prestige', 'Innovation'];
+        const words = ['Innovation', 'Maroc 2030', 'Prestige', 'Tourisme'];
         let wi = 0, ci = 0, deleting = false;
         function type() {
             const word = words[wi];

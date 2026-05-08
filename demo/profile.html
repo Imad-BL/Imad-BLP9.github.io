@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 5 – Espace Client | Marina Car Demo</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Module 5 – Espace Client | Démo Agence</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="demo-client.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .demo-nav { position:fixed;top:0;left:0;width:100%;background:rgba(5,5,5,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,175,55,0.2);z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px; }
@@ -140,7 +141,7 @@
 <body>
     <nav class="demo-nav">
         <div class="demo-nav-left">
-            <div class="demo-nav-logo">Marina Car</div>
+            <div class="demo-nav-logo demo-client-name">Votre Agence</div>
             <div class="demo-module-label">Module 5 / 5</div>
             <div class="demo-progress">
                 <div class="demo-dot done"></div>
@@ -151,9 +152,9 @@
             </div>
         </div>
         <div class="demo-nav-right">
-            <a href="demo_hub.html" class="demo-exit"><i class="fas fa-th-large"></i> Hub</a>
-            <a href="gps_demo.html" class="demo-btn demo-btn-prev"><i class="fas fa-arrow-left"></i> Précédent</a>
-            <a href="demo_hub.html" class="demo-btn demo-btn-finish">✓ Terminer la Visite</a>
+            <a href="hub.html" class="demo-exit"><i class="fas fa-th-large"></i> Hub</a>
+            <a href="gps.html" class="demo-btn demo-btn-prev"><i class="fas fa-arrow-left"></i> Précédent</a>
+            <a href="hub.html" class="demo-btn demo-btn-finish">✓ Terminer la Visite</a>
         </div>
     </nav>
 
@@ -205,13 +206,13 @@
             <div class="cp-section">
                 <div class="cp-section-title"><i class="fas fa-car"></i> Location en Cours</div>
                 <div class="active-rental">
-                    <img src="assets/cars/volkswagen/golf-8/main.png" alt="Golf 8">
+                    <img src="../assets/cars/volkswagen/golf-8/main.png" alt="Golf 8">
                     <div class="active-rental-info">
                         <div class="active-rental-name">Volkswagen Golf 8</div>
                         <div class="active-rental-tag">✔ LOCATION ACTIVE</div>
                         <div class="rental-details">
-                            <div class="rental-detail"><i class="fas fa-calendar-alt"></i> Retour : 10 Mai 2026 — Rabat Marina</div>
-                            <div class="rental-detail"><i class="fas fa-file-contract"></i> Contrat : #MC-2026-083</div>
+                            <div class="rental-detail"><i class="fas fa-calendar-alt"></i> Retour : 10 Mai 2026 — Agence Centre</div>
+                            <div class="rental-detail"><i class="fas fa-file-contract"></i> Contrat : #LX-2026-083</div>
                             <div class="rental-detail"><i class="fas fa-gas-pump"></i> Carburant : 78%</div>
                         </div>
                         <div class="rental-progress">
@@ -314,7 +315,7 @@
     <div class="cp-final">
         <div class="badge-complete">✓ VISITE COMPLÈTE — 5/5 MODULES</div>
         <h2>Vous avez tout vu.<br>Passons à <span>l'Action</span>.</h2>
-        <p>Vous avez découvert les 5 piliers de l'écosystème Marina Car. Choisissez le pack adapté à votre agence et nous lançons le projet sous 48h.</p>
+        <p>Vous avez découvert les 5 piliers de l'écosystème digital. Choisissez le pack adapté à votre agence et nous lançons le projet sous 48h.</p>
         <div class="cp-final-btns">
             <a href="index.html#pricing" class="cta-button">
                 <i class="fas fa-rocket"></i> Voir les Offres & Tarifs
@@ -322,12 +323,12 @@
             <a href="index.html#contact" class="btn-outline">
                 <i class="fas fa-phone-alt"></i> Prendre un RDV
             </a>
-            <a href="demo_hub.html" class="btn-outline">
+            <a href="hub.html" class="btn-outline">
                 <i class="fas fa-redo"></i> Revoir les Démos
             </a>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>

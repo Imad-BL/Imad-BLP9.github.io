@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 2 – Business Intelligence | Marina Car Demo</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Module 2 – Business Intelligence | Démo Agence</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="demo-client.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* DEMO NAV */
@@ -166,7 +167,7 @@
 <body>
     <nav class="demo-nav">
         <div class="demo-nav-left">
-            <div class="demo-nav-logo">Marina Car</div>
+            <div class="demo-nav-logo demo-client-name">Votre Agence</div>
             <div class="demo-module-label">Module 2 / 5</div>
             <div class="demo-progress">
                 <div class="demo-dot done"></div>
@@ -177,9 +178,9 @@
             </div>
         </div>
         <div class="demo-nav-right">
-            <a href="demo_hub.html" class="demo-exit"><i class="fas fa-th-large"></i> Hub</a>
-            <a href="vitrine_demo.html" class="demo-btn demo-btn-prev"><i class="fas fa-arrow-left"></i> Précédent</a>
-            <a href="erp_demo.html" class="demo-btn demo-btn-next">Suivant : Office ERP <i class="fas fa-arrow-right"></i></a>
+            <a href="hub.html" class="demo-exit"><i class="fas fa-th-large"></i> Hub</a>
+            <a href="vitrine.html" class="demo-btn demo-btn-prev"><i class="fas fa-arrow-left"></i> Précédent</a>
+            <a href="erp.html" class="demo-btn demo-btn-next">Suivant : Office ERP <i class="fas fa-arrow-right"></i></a>
         </div>
     </nav>
 
@@ -193,7 +194,7 @@
     <!-- FULL DASHBOARD DEMO -->
     <div class="bi-dashboard">
         <div class="bi-dash-header">
-            <h3><i class="fas fa-chart-pie" style="color:var(--primary); margin-right:10px;"></i> Marina Car — Business Intelligence Console</h3>
+            <h3><i class="fas fa-chart-pie" style="color:var(--primary); margin-right:10px;"></i> <span class="demo-client-name">Votre Agence</span> — Business Intelligence Console</h3>
             <div class="bi-period">Période : Mai 2026 ▾</div>
         </div>
         <div class="bi-body">
@@ -350,11 +351,11 @@
     <section class="bi-cta">
         <h2>Impressionné ?</h2>
         <p>Passez maintenant à l'Office ERP — la gestion complète de vos contrats et de votre flotte. Module 3/5</p>
-        <a href="erp_demo.html" class="cta-button">
+        <a href="erp.html" class="cta-button">
             Module Suivant : Office ERP <i class="fas fa-arrow-right"></i>
         </a>
     </section>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>

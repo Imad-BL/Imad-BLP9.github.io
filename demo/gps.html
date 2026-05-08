@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 4 – GPS Live | Marina Car Demo</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Module 4 – GPS Live | Démo Agence</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="demo-client.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .demo-nav { position:fixed;top:0;left:0;width:100%;background:rgba(0,0,0,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,175,55,0.2);z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px; }
@@ -159,7 +160,7 @@
 <body>
     <nav class="demo-nav">
         <div class="demo-nav-left">
-            <div class="demo-nav-logo">Marina Car</div>
+            <div class="demo-nav-logo demo-client-name">Votre Agence</div>
             <div class="demo-module-label">Module 4 / 5</div>
             <div class="demo-progress">
                 <div class="demo-dot done"></div>
@@ -170,8 +171,8 @@
             </div>
         </div>
         <div class="demo-nav-right">
-            <a href="demo_hub.html" class="demo-exit"><i class="fas fa-th-large"></i> Hub</a>
-            <a href="erp_demo.html" class="demo-btn demo-btn-prev"><i class="fas fa-arrow-left"></i> Précédent</a>
+            <a href="hub.html" class="demo-exit"><i class="fas fa-th-large"></i> Hub</a>
+            <a href="erp.html" class="demo-btn demo-btn-prev"><i class="fas fa-arrow-left"></i> Précédent</a>
             <a href="profile.html" class="demo-btn demo-btn-next">Suivant : Espace Client <i class="fas fa-arrow-right"></i></a>
         </div>
     </nav>
@@ -215,7 +216,7 @@
             <div style="position:absolute;top:48%;left:28%;font-size:0.55rem;color:rgba(255,255,255,0.2);font-weight:700;letter-spacing:1px;">AGDAL</div>
             <div style="position:absolute;top:32%;left:48%;font-size:0.55rem;color:rgba(255,255,255,0.2);font-weight:700;letter-spacing:1px;">HASSAN</div>
             <div style="position:absolute;top:65%;left:60%;font-size:0.55rem;color:rgba(255,255,255,0.2);font-weight:700;letter-spacing:1px;">SOUISSI</div>
-            <div style="position:absolute;top:20%;left:15%;font-size:0.55rem;color:rgba(255,255,255,0.2);font-weight:700;letter-spacing:1px;">MARINA</div>
+            <div style="position:absolute;top:20%;left:15%;font-size:0.55rem;color:rgba(255,255,255,0.2);font-weight:700;letter-spacing:1px;">ZONE A</div>
         </div>
 
         <div class="gps-sidebar">
@@ -257,7 +258,7 @@
                     </div>
                     <div class="veh-details">
                         <div class="veh-detail"><i class="fas fa-clock"></i> Depuis 2h15</div>
-                        <div class="veh-detail"><i class="fas fa-location-arrow"></i> Marina Rabat</div>
+                        <div class="veh-detail"><i class="fas fa-location-arrow"></i> Agence Centre</div>
                         <div class="veh-detail"><i class="fas fa-user"></i> Karim I.</div>
                         <div class="veh-detail"><i class="fas fa-gas-pump"></i> 62%</div>
                     </div>
@@ -332,7 +333,7 @@
         </a>
     </div>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
     <script>
         // Live car movement simulation
         function moveCars() {

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 1 – Vitrine Luxe | Marina Car Demo</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Module 1 – Vitrine Digitale | Démo Agence</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="demo-client.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* DEMO NAVIGATION BAR */
@@ -181,7 +182,7 @@
     <!-- DEMO NAVIGATION -->
     <nav class="demo-nav">
         <div class="demo-nav-left">
-            <div class="demo-nav-logo">Marina Car</div>
+            <div class="demo-nav-logo demo-client-name">Votre Agence</div>
             <div class="demo-module-label">Module 1 / 5</div>
             <div class="demo-progress">
                 <div class="demo-dot active" title="Vitrine Luxe"></div>
@@ -192,18 +193,18 @@
             </div>
         </div>
         <div class="demo-nav-right">
-            <a href="demo_hub.html" class="demo-exit"><i class="fas fa-th-large"></i> Hub</a>
-            <a href="demo_hub.html" class="demo-btn demo-btn-prev"><i class="fas fa-arrow-left"></i> Accueil</a>
-            <a href="admin_demo.html" class="demo-btn demo-btn-next">Suivant : Dashboard <i class="fas fa-arrow-right"></i></a>
+            <a href="hub.html" class="demo-exit"><i class="fas fa-th-large"></i> Hub</a>
+            <a href="hub.html" class="demo-btn demo-btn-prev"><i class="fas fa-arrow-left"></i> Accueil</a>
+            <a href="admin.html" class="demo-btn demo-btn-next">Suivant : Dashboard <i class="fas fa-arrow-right"></i></a>
         </div>
     </nav>
 
     <!-- HERO -->
     <section class="vit-hero">
-        <img src="assets/cars/mercedes/classe-g/main.png" class="vit-bg" alt="Luxe BG">
+        <img src="../assets/cars/mercedes/classe-g/main.png" class="vit-bg" alt="Luxe BG">
         <div class="vit-overlay"></div>
         <div class="vit-hero-content">
-            <div class="vit-tag">Module 01 — Vitrine Luxe</div>
+            <div class="vit-tag">Module 01 — Vitrine Digitale</div>
             <h1>L'Excellence<br><span>Visuelle</span></h1>
             <p>Votre site vitrine se transforme en un showroom digital qui respire le prestige et convertit vos visiteurs en clients.</p>
             <div class="vit-features">
@@ -218,21 +219,21 @@
     <!-- GALLERY -->
     <section class="vit-gallery">
         <div class="gal-item">
-            <img src="assets/cars/range-rover/evoque/main.png" alt="Confort">
+            <img src="../assets/cars/range-rover/evoque/main.png" alt="Catalogue">
             <div class="gal-overlay">
-                <h3>Présentation Flotte</h3>
+                <h3>Catalogue Produit</h3>
                 <p>Catalogue filtrable et interactif</p>
             </div>
         </div>
         <div class="gal-item">
-            <img src="assets/cars/volkswagen/golf-8/main.png" alt="Performance">
+            <img src="../assets/cars/volkswagen/golf-8/main.png" alt="Fiches">
             <div class="gal-overlay">
-                <h3>Fiches Véhicule Détaillées</h3>
+                <h3>Fiches Produit Détaillées</h3>
                 <p>Modal immersif avec specs complètes</p>
             </div>
         </div>
         <div class="gal-item">
-            <img src="assets/cars/mercedes/classe-g/main.png" alt="Prestige">
+            <img src="../assets/cars/mercedes/classe-g/main.png" alt="Réservation">
             <div class="gal-overlay">
                 <h3>Appel à l'Action Optimisé</h3>
                 <p>Formulaire de réservation intégré</p>
@@ -243,11 +244,11 @@
     <!-- WHAT CLIENT GETS -->
     <div class="vit-what">
         <div class="vit-what-text">
-            <h2>Ce que reçoit votre <span>Agence</span></h2>
-            <p>Un site internet professionnel, rapide et optimisé pour convertir des visiteurs en clients réels — livré clef en main.</p>
+            <h2>Ce que reçoit <span class="demo-client-name">votre Agence</span></h2>
+            <p>Un site internet professionnel, rapide et optimisé pour convertir des visiteurs en clients réels — livré clé en main.</p>
             <ul class="what-list">
                 <li><i class="fas fa-check"></i> Design UI/UX sur mesure "Midnight Luxury"</li>
-                <li><i class="fas fa-check"></i> Catalogue de voitures filtrable (SUV, Berline, Luxe…)</li>
+                <li><i class="fas fa-check"></i> Catalogue produits filtrable et interactif</li>
                 <li><i class="fas fa-check"></i> Page de contact + formulaire de réservation</li>
                 <li><i class="fas fa-check"></i> Optimisé Google (SEO) + Core Web Vitals</li>
                 <li><i class="fas fa-check"></i> Adapté mobile, tablette et desktop</li>
@@ -259,7 +260,7 @@
                 <div class="mock-dot" style="background:#ff5f56;"></div>
                 <div class="mock-dot" style="background:#ffbd2e;"></div>
                 <div class="mock-dot" style="background:#27c93f;"></div>
-                <div class="mock-url">marinacar.ma</div>
+                <div class="mock-url"><span class="demo-client-name" style="text-transform:lowercase;">votre-agence</span>.ma</div>
             </div>
             <div class="mock-screen">
                 <div class="mock-hero-bar"></div>
@@ -279,11 +280,11 @@
     <section class="vit-cta">
         <h2>Prêt à voir la suite ?</h2>
         <p>Explorez maintenant le Dashboard de pilotage Business Intelligence — module 2/5</p>
-        <a href="admin_demo.html" class="cta-button">
+        <a href="admin.html" class="cta-button">
             Module Suivant : Business Intelligence <i class="fas fa-arrow-right"></i>
         </a>
     </section>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>

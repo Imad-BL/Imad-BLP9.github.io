@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 3 – Office ERP | Marina Car Demo</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Module 3 – Office ERP | Démo Agence</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="demo-client.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .demo-nav { position:fixed;top:0;left:0;width:100%;background:rgba(5,5,5,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,175,55,0.2);z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px; }
@@ -132,7 +133,7 @@
 <body>
     <nav class="demo-nav">
         <div class="demo-nav-left">
-            <div class="demo-nav-logo">Marina Car</div>
+            <div class="demo-nav-logo demo-client-name">Votre Agence</div>
             <div class="demo-module-label">Module 3 / 5</div>
             <div class="demo-progress">
                 <div class="demo-dot done"></div>
@@ -143,9 +144,9 @@
             </div>
         </div>
         <div class="demo-nav-right">
-            <a href="demo_hub.html" class="demo-exit"><i class="fas fa-th-large"></i> Hub</a>
-            <a href="admin_demo.html" class="demo-btn demo-btn-prev"><i class="fas fa-arrow-left"></i> Précédent</a>
-            <a href="gps_demo.html" class="demo-btn demo-btn-next">Suivant : GPS Live <i class="fas fa-arrow-right"></i></a>
+            <a href="hub.html" class="demo-exit"><i class="fas fa-th-large"></i> Hub</a>
+            <a href="admin.html" class="demo-btn demo-btn-prev"><i class="fas fa-arrow-left"></i> Précédent</a>
+            <a href="gps.html" class="demo-btn demo-btn-next">Suivant : GPS Live <i class="fas fa-arrow-right"></i></a>
         </div>
     </nav>
 
@@ -161,7 +162,7 @@
         <div class="erp-top-bar">
             <div class="erp-top-bar-left">
                 <span class="erp-app-name">OFFICE ERP</span>
-                <span style="font-size:0.7rem;color:#7f8c8d;">| Administration Marina Car</span>
+                <span style="font-size:0.7rem;color:#7f8c8d;">| Administration <span class="demo-client-name">Votre Agence</span></span>
             </div>
             <div class="erp-top-bar-right">
                 <button class="erp-top-btn erp-btn-outline"><i class="fas fa-file-pdf"></i> Export PDF</button>
@@ -173,7 +174,7 @@
         <div class="erp-layout">
             <div class="erp-aside">
                 <div class="aside-item active"><i class="fas fa-file-contract"></i> Contrats</div>
-                <div class="aside-item"><i class="fas fa-car"></i> Parc Auto</div>
+                <div class="aside-item"><i class="fas fa-box"></i> Inventaire</div>
                 <div class="aside-item"><i class="fas fa-users"></i> Clients (CRM)</div>
                 <div class="aside-item"><i class="fas fa-wallet"></i> Trésorerie</div>
                 <div class="aside-sep"></div>
@@ -201,7 +202,7 @@
                         <div class="erp-kpi-val green">12,400 MAD</div>
                     </div>
                     <div class="erp-kpi">
-                        <div class="erp-kpi-label">Véhicules Disponibles</div>
+                        <div class="erp-kpi-label">Unités Disponibles</div>
                         <div class="erp-kpi-val">15</div>
                     </div>
                 </div>
@@ -213,7 +214,7 @@
                             <tr>
                                 <th>N° Contrat</th>
                                 <th>Client</th>
-                                <th>Véhicule</th>
+                                <th>Produit / Article</th>
                                 <th>Période</th>
                                 <th>Montant</th>
                                 <th>Paiement</th>
@@ -222,7 +223,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>#MC-2026-084</strong></td>
+                                <td><strong>#LX-2026-084</strong></td>
                                 <td>Karim El Idrissi</td>
                                 <td>Mercedes G-Class</td>
                                 <td>01/05 — 08/05</td>
@@ -234,7 +235,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>#MC-2026-083</strong></td>
+                                <td><strong>#LX-2026-083</strong></td>
                                 <td>Sarah Chraibi</td>
                                 <td>VW Golf 8</td>
                                 <td>04/05 — 06/05</td>
@@ -246,7 +247,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>#MC-2026-082</strong></td>
+                                <td><strong>#LX-2026-082</strong></td>
                                 <td>Omar Tazi</td>
                                 <td>Hyundai Tucson</td>
                                 <td>05/05 — 09/05</td>
@@ -340,11 +341,11 @@
     <div class="erp-cta">
         <h2>Vous voyez la puissance ?</h2>
         <p>Découvrez maintenant le module GPS — surveillance de votre flotte en direct. Module 4/5</p>
-        <a href="gps_demo.html" class="cta-button">
+        <a href="gps.html" class="cta-button">
             Module Suivant : Tracking GPS Live <i class="fas fa-arrow-right"></i>
         </a>
     </div>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>
