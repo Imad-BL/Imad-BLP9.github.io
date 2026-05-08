@@ -10,11 +10,12 @@
         /* ── CUSTOMIZATION BANNER ── */
         .demo-customize-bar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 2000;
-            background: linear-gradient(135deg, #1a1200, #0d0d0d);
-            border-bottom: 1px solid rgba(212,175,55,0.4);
+            background: #ffffff;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
             padding: 0.6rem 5%;
             display: flex; align-items: center; justify-content: space-between;
             gap: 1rem; flex-wrap: wrap;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
         }
         .dcb-left {
             display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
@@ -24,20 +25,20 @@
             text-transform: uppercase; color: var(--primary); white-space: nowrap;
         }
         .dcb-input {
-            background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.3);
-            color: #fff; padding: 0.45rem 1rem; border-radius: 4px;
+            background: #f9f9f9; border: 1px solid var(--glass-border);
+            color: #000; padding: 0.45rem 1rem; border-radius: 4px;
             font-size: 0.8rem; font-family: 'Outfit', sans-serif; font-weight: 600;
             outline: none; width: 200px; transition: border-color 0.3s;
         }
         .dcb-input:focus { border-color: var(--primary); }
-        .dcb-input::placeholder { color: rgba(255,255,255,0.3); }
+        .dcb-input::placeholder { color: rgba(0,0,0,0.3); }
         .dcb-select {
-            background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.3);
-            color: #fff; padding: 0.45rem 1rem; border-radius: 4px;
+            background: #f9f9f9; border: 1px solid var(--glass-border);
+            color: #000; padding: 0.45rem 1rem; border-radius: 4px;
             font-size: 0.8rem; font-family: 'Outfit', sans-serif; font-weight: 600;
             outline: none; cursor: pointer;
         }
-        .dcb-select option { background: #1a1a1a; }
+        .dcb-select option { background: #ffffff; }
         .dcb-apply {
             background: var(--primary); color: #000; border: none;
             padding: 0.5rem 1.2rem; border-radius: 4px; font-size: 0.75rem;
@@ -46,7 +47,7 @@
         }
         .dcb-apply:hover { background: var(--primary-bright); transform: translateY(-1px); }
         .dcb-right {
-            font-size: 0.65rem; color: rgba(255,255,255,0.35); letter-spacing: 1px;
+            font-size: 0.65rem; color: rgba(0,0,0,0.35); letter-spacing: 1px;
             white-space: nowrap;
         }
         .dcb-confirm {
@@ -68,7 +69,7 @@
         .hub-hero {
             min-height: 90vh; display: flex; align-items: center;
             justify-content: center; text-align: center;
-            background: radial-gradient(ellipse at center, #1a1200 0%, #050505 70%);
+            background: radial-gradient(ellipse at center, #ffffff 0%, #f9f9f9 70%);
             position: relative; overflow: hidden; padding: 0 5%;
         }
         .hub-hero::before {
@@ -122,7 +123,7 @@
         }
 
         /* Progress Overview */
-        .hub-overview { padding: 8rem 5%; background: #080808; }
+        .hub-overview { padding: 8rem 5%; background: #ffffff; }
         .overview-title { text-align: center; margin-bottom: 5rem; }
         .overview-title span { color: var(--primary); letter-spacing: 5px; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; }
         .overview-title h2 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; margin-top: 1rem; }
@@ -153,7 +154,7 @@
         .module-tag i { font-size: 0.7rem; }
 
         /* Steps Flow */
-        .hub-steps { padding: 8rem 5%; background: #050505; }
+        .hub-steps { padding: 8rem 5%; background: #fdfdfd; }
         .steps-title { text-align: center; margin-bottom: 5rem; }
         .steps-title span { color: var(--primary); letter-spacing: 5px; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; }
         .steps-title h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-top: 1rem; }
@@ -166,7 +167,7 @@
         .start-tour-cta p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1rem; }
 
         /* Industries strip */
-        .industries-strip { padding: 5rem 5%; background: #030303; border-top: 1px solid var(--glass-border); }
+        .industries-strip { padding: 5rem 5%; background: #ffffff; border-top: 1px solid var(--glass-border); }
         .industries-strip h3 { text-align: center; font-size: 0.75rem; color: var(--text-muted); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 3rem; }
         .industries-grid { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
         .ind-chip { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; padding: 1.5rem 2rem; background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 10px; transition: 0.3s; cursor: pointer; text-decoration: none; }
@@ -337,7 +338,7 @@
     </section>
 
     <!-- FOOTER CTA -->
-    <section style="padding: 8rem 5%; text-align: center; background: #030303; border-top: 1px solid var(--glass-border);">
+    <section style="padding: 8rem 5%; text-align: center; background: #f9f9f9; border-top: 1px solid var(--glass-border);">
         <span style="color: var(--primary); letter-spacing: 5px; font-weight: 800; font-size: 0.8rem; text-transform: uppercase;">Convaincu ?</span>
         <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin: 1.5rem 0;">Lançons votre Projet</h2>
         <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 3rem;">Choisissez la solution adaptée à votre agence et notre équipe vous contacte sous 24h pour démarrer.</p>

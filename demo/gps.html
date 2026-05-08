@@ -8,47 +8,47 @@
     <script src="demo-client.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .demo-nav { position:fixed;top:0;left:0;width:100%;background:rgba(0,0,0,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,175,55,0.2);z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px; }
+        .demo-nav { position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.08);z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px;box-shadow: 0 2px 20px rgba(0,0,0,0.05); }
         .demo-nav-left { display:flex;align-items:center;gap:1.5rem; }
         .demo-nav-logo { font-weight:900;color:var(--primary);font-size:1.1rem;letter-spacing:2px; }
         .demo-progress { display:flex;align-items:center;gap:0.5rem; }
-        .demo-dot { width:28px;height:4px;border-radius:2px;background:rgba(255,255,255,0.1);transition:all 0.3s; }
+        .demo-dot { width:28px;height:4px;border-radius:2px;background:rgba(0,0,0,0.05);transition:all 0.3s; }
         .demo-dot.done { background:rgba(212,175,55,0.4); }
         .demo-dot.active { background:var(--primary); }
         .demo-module-label { font-size:0.7rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary); }
         .demo-nav-right { display:flex;align-items:center;gap:1rem; }
         .demo-btn { padding:0.6rem 1.4rem;border-radius:2px;font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s; }
-        .demo-btn-prev { background:transparent;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5); }
-        .demo-btn-prev:hover { border-color:rgba(255,255,255,0.4);color:#fff; }
+        .demo-btn-prev { background:transparent;border:1px solid rgba(0,0,0,0.1);color:rgba(0,0,0,0.5); }
+        .demo-btn-prev:hover { border-color:rgba(0,0,0,0.2);color:#000; }
         .demo-btn-next { background:var(--primary);border:1px solid var(--primary);color:#000; }
         .demo-btn-next:hover { background:var(--primary-bright);transform:translateY(-2px); }
-        .demo-exit { font-size:0.7rem;color:rgba(255,255,255,0.3);text-decoration:none;padding:0.4rem 0.8rem;transition:color 0.3s; }
-        .demo-exit:hover { color:rgba(255,255,255,0.7); }
+        .demo-exit { font-size:0.7rem;color:rgba(0,0,0,0.3);text-decoration:none;padding:0.4rem 0.8rem;transition:color 0.3s; }
+        .demo-exit:hover { color:rgba(0,0,0,0.6); }
 
-        body { margin:0;padding-top:64px;background:#000;color:#fff;font-family:'Outfit',sans-serif; }
+        body { margin:0;padding-top:64px;background:#ffffff;color:#1a1a1a;font-family:'Outfit',sans-serif; }
 
         /* HEADER */
-        .gps-header { padding:4rem 5% 3rem;text-align:center;background:linear-gradient(to bottom,#060810,#000); }
+        .gps-header { padding:4rem 5% 3rem;text-align:center;background:linear-gradient(to bottom,#ffffff,#f9f9f9); }
         .gps-badge { display:inline-block;background:rgba(39,201,63,0.1);border:1px solid rgba(39,201,63,0.3);color:#27c93f;padding:0.4rem 1.2rem;border-radius:100px;font-size:0.65rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;margin-bottom:1.5rem; }
         .gps-header h1 { font-size:clamp(2.5rem,5vw,4rem);font-weight:800;margin-bottom:1rem; }
         .gps-header h1 span { color:#27c93f; }
-        .gps-header p { color:rgba(255,255,255,0.5);max-width:600px;margin:0 auto;font-size:1rem;line-height:1.8; }
+        .gps-header p { color:rgba(0,0,0,0.5);max-width:600px;margin:0 auto;font-size:1rem;line-height:1.8; }
 
         /* MAIN GPS LAYOUT */
         .gps-interface {
             margin: 0 5% 0;
             display: grid; grid-template-columns: 1fr 360px;
-            background: #0a0a0a;
-            border: 1px solid rgba(255,255,255,0.06);
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.06);
             border-radius: 12px; overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.7);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
             min-height: 560px;
         }
 
         /* MAP AREA */
         .map-area {
             position: relative;
-            background: #0d1117;
+            background: #f0f4f8;
             overflow: hidden;
         }
         .map-grid {
@@ -59,7 +59,7 @@
         }
         /* Simulated road paths */
         .map-road {
-            position: absolute; background: rgba(255,255,255,0.06);
+            position: absolute; background: rgba(0,0,0,0.05);
             border-radius: 2px;
         }
         .map-overlay-ui {
@@ -68,9 +68,10 @@
         }
         .map-chip {
             display:inline-flex;align-items:center;gap:8px;
-            background:rgba(0,0,0,0.8);border:1px solid rgba(39,201,63,0.3);
+            background:rgba(255,255,255,0.9);border:1px solid rgba(39,201,63,0.3);
             padding:0.5rem 1rem;border-radius:100px;font-size:0.7rem;font-weight:700;
-            color:#27c93f;letter-spacing:1px;
+            color:#1e8e3e;letter-spacing:1px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         .live-dot { width:7px;height:7px;border-radius:50%;background:#27c93f;animation:blink 1.2s infinite; }
         @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0.2;} }
@@ -94,25 +95,25 @@
         .v-marker.active .v-marker-icon { background:rgba(39,201,63,0.2);border-color:#27c93f;color:#27c93f; }
         .v-marker.stopped .v-marker-icon { background:rgba(255,189,46,0.2);border-color:#ffbd2e;color:#ffbd2e; }
         .v-marker.alert .v-marker-icon { background:rgba(231,76,60,0.2);border-color:#e74c3c;color:#e74c3c; }
-        .v-label { font-size:0.55rem;font-weight:800;letter-spacing:1px;margin-top:4px;background:rgba(0,0,0,0.8);padding:2px 6px;border-radius:4px;white-space:nowrap; }
-        .v-marker.active .v-label { color:#27c93f; }
-        .v-marker.stopped .v-label { color:#ffbd2e; }
-        .v-marker.alert .v-label { color:#e74c3c; }
+        .v-label { font-size:0.55rem;font-weight:800;letter-spacing:1px;margin-top:4px;background:rgba(255,255,255,0.9);padding:2px 6px;border-radius:4px;white-space:nowrap;box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .v-marker.active .v-label { color:#1e8e3e; }
+        .v-marker.stopped .v-label { color:#c18b00; }
+        .v-marker.alert .v-label { color:#c0392b; }
 
         /* GPS SIDEBAR */
-        .gps-sidebar { background:#0f0f0f;border-left:1px solid #1a1a1a;display:flex;flex-direction:column; }
-        .gps-sidebar-header { padding:1.2rem 1.5rem;border-bottom:1px solid #1a1a1a;display:flex;align-items:center;justify-content:space-between; }
-        .gps-sidebar-header h3 { font-size:0.85rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin:0; }
-        .fleet-count { font-size:0.65rem;color:#555;padding:3px 8px;border:1px solid #1a1a1a;border-radius:100px; }
-        .fleet-stats { display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:#1a1a1a;border-bottom:1px solid #1a1a1a; }
-        .fleet-stat { background:#0f0f0f;padding:0.8rem;text-align:center; }
+        .gps-sidebar { background:#fdfdfd;border-left:1px solid #eeeeee;display:flex;flex-direction:column; }
+        .gps-sidebar-header { padding:1.2rem 1.5rem;border-bottom:1px solid #eeeeee;display:flex;align-items:center;justify-content:space-between; }
+        .gps-sidebar-header h3 { font-size:0.85rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin:0;color:#000; }
+        .fleet-count { font-size:0.65rem;color:#888;padding:3px 8px;border:1px solid #eeeeee;border-radius:100px; }
+        .fleet-stats { display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:#eeeeee;border-bottom:1px solid #eeeeee; }
+        .fleet-stat { background:#fdfdfd;padding:0.8rem;text-align:center; }
         .fleet-stat-num { font-size:1.2rem;font-weight:900; }
-        .fleet-stat-label { font-size:0.55rem;color:#555;text-transform:uppercase;letter-spacing:1px;margin-top:2px; }
+        .fleet-stat-label { font-size:0.55rem;color:#888;text-transform:uppercase;letter-spacing:1px;margin-top:2px; }
 
         .vehicle-list { flex:1;overflow-y:auto;padding:1rem; }
-        .veh-card { background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:1.2rem;margin-bottom:0.8rem;transition:0.3s;cursor:pointer; }
-        .veh-card:hover { background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1); }
-        .veh-card.active { border-left:3px solid #27c93f;background:rgba(39,201,63,0.04); }
+        .veh-card { background:#ffffff;border:1px solid #eeeeee;border-radius:10px;padding:1.2rem;margin-bottom:0.8rem;transition:0.3s;cursor:pointer; }
+        .veh-card:hover { background:#f9f9f9;border-color:#dddddd; }
+        .veh-card.active { border-left:3px solid #27c93f;background:rgba(39,201,63,0.02); }
         .veh-card.stopped { border-left:3px solid #ffbd2e; }
         .veh-card.alert { border-left:3px solid #e74c3c; }
         .veh-card-head { display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem; }
@@ -122,32 +123,32 @@
         .veh-status.stopped { background:rgba(255,189,46,0.15);color:#ffbd2e; }
         .veh-status.alert { background:rgba(231,76,60,0.15);color:#e74c3c; }
         .veh-details { display:grid;grid-template-columns:1fr 1fr;gap:0.5rem; }
-        .veh-detail { font-size:0.7rem;color:#555;display:flex;align-items:center;gap:6px; }
+        .veh-detail { font-size:0.7rem;color:#888;display:flex;align-items:center;gap:6px; }
         .veh-detail i { width:12px; }
 
-        .gps-actions { padding:1.2rem;border-top:1px solid #1a1a1a; }
+        .gps-actions { padding:1.2rem;border-top:1px solid #eeeeee; }
         .gps-cutoff-btn { width:100%;padding:0.9rem;background:#e74c3c;border:none;border-radius:8px;color:#fff;font-weight:800;font-size:0.8rem;letter-spacing:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:0.3s;text-transform:uppercase; }
         .gps-cutoff-btn:hover { background:#c0392b;transform:translateY(-2px);box-shadow:0 10px 20px rgba(231,76,60,0.3); }
-        .gps-legal { font-size:0.6rem;color:#333;text-align:center;margin-top:0.8rem; }
+        .gps-legal { font-size:0.6rem;color:#aaa;text-align:center;margin-top:0.8rem; }
 
         /* WHAT & FEATURES */
-        .gps-what { padding:5rem 5%;background:#050505; }
+        .gps-what { padding:5rem 5%; background:#ffffff; }
         .gps-what-inner { max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center; }
-        .gps-what-text h2 { font-size:2.2rem;font-weight:800;margin-bottom:1rem; }
+        .gps-what-text h2 { font-size:2.2rem;font-weight:800;margin-bottom:1rem;color:#000; }
         .gps-what-text h2 span { color:#27c93f; }
-        .gps-what-text p { color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:2rem; }
+        .gps-what-text p { color:rgba(0,0,0,0.5);line-height:1.8;margin-bottom:2rem; }
         .gps-list { list-style:none;padding:0; }
-        .gps-list li { display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem;font-size:0.9rem; }
+        .gps-list li { display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem;font-size:0.9rem;color:#333; }
         .gps-list li i { color:#27c93f;width:16px; }
         .gps-features-grid { display:grid;grid-template-columns:1fr 1fr;gap:1rem; }
-        .gps-feat { background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:1.5rem;text-align:center; }
+        .gps-feat { background:#fdfdfd;border:1px solid #eeeeee;border-radius:10px;padding:1.5rem;text-align:center; }
         .gps-feat i { font-size:1.5rem;margin-bottom:0.8rem;display:block; }
-        .gps-feat h5 { font-size:0.85rem;margin:0 0 0.5rem;font-weight:700; }
-        .gps-feat p { font-size:0.75rem;color:rgba(255,255,255,0.4);margin:0; }
+        .gps-feat h5 { font-size:0.85rem;margin:0 0 0.5rem;font-weight:700;color:#000; }
+        .gps-feat p { font-size:0.75rem;color:rgba(0,0,0,0.4);margin:0; }
 
-        .gps-cta { padding:5rem 5%;text-align:center;background:#000;border-top:1px solid rgba(255,255,255,0.05); }
-        .gps-cta h2 { font-size:2.2rem;font-weight:800;margin-bottom:1rem; }
-        .gps-cta p { color:rgba(255,255,255,0.5);margin-bottom:2.5rem; }
+        .gps-cta { padding:5rem 5%;text-align:center;background:#f9f9f9;border-top:1px solid rgba(0,0,0,0.05); }
+        .gps-cta h2 { font-size:2.2rem;font-weight:800;margin-bottom:1rem;color:#000; }
+        .gps-cta p { color:rgba(0,0,0,0.5);margin-bottom:2.5rem; }
 
         @media(max-width:1024px) {
             .gps-interface { grid-template-columns:1fr; }

@@ -11,35 +11,36 @@
         /* DEMO NAV */
         .demo-nav {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(5,5,5,0.97); backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(212,175,55,0.2);
+            background: rgba(255,255,255,0.97); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
             z-index: 1000; padding: 0 5%;
             display: flex; align-items: center; justify-content: space-between;
             height: 64px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
         }
         .demo-nav-left { display: flex; align-items: center; gap: 1.5rem; }
         .demo-nav-logo { font-weight: 900; color: var(--primary); font-size: 1.1rem; letter-spacing: 2px; }
         .demo-progress { display: flex; align-items: center; gap: 0.5rem; }
-        .demo-dot { width: 28px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.1); transition: all 0.3s; }
+        .demo-dot { width: 28px; height: 4px; border-radius: 2px; background: rgba(0,0,0,0.05); transition: all 0.3s; }
         .demo-dot.done { background: rgba(212,175,55,0.4); }
         .demo-dot.active { background: var(--primary); }
         .demo-module-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); }
         .demo-nav-right { display: flex; align-items: center; gap: 1rem; }
         .demo-btn { padding: 0.6rem 1.4rem; border-radius: 2px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s; }
-        .demo-btn-prev { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); }
-        .demo-btn-prev:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
+        .demo-btn-prev { background: transparent; border: 1px solid rgba(0,0,0,0.1); color: rgba(0,0,0,0.5); }
+        .demo-btn-prev:hover { border-color: rgba(0,0,0,0.2); color: #000; }
         .demo-btn-next { background: var(--primary); border: 1px solid var(--primary); color: #000; }
         .demo-btn-next:hover { background: var(--primary-bright); transform: translateY(-2px); }
-        .demo-exit { font-size: 0.7rem; color: rgba(255,255,255,0.3); text-decoration: none; padding: 0.4rem 0.8rem; transition: color 0.3s; }
-        .demo-exit:hover { color: rgba(255,255,255,0.7); }
+        .demo-exit { font-size: 0.7rem; color: rgba(0,0,0,0.3); text-decoration: none; padding: 0.4rem 0.8rem; transition: color 0.3s; }
+        .demo-exit:hover { color: rgba(0,0,0,0.6); }
 
         /* LAYOUT */
-        body { background: #050505; color: #fff; padding-top: 64px; min-height: 100vh; }
+        body { background: #ffffff; color: #1a1a1a; padding-top: 64px; min-height: 100vh; }
 
         .bi-header {
             padding: 5rem 5% 3rem;
             text-align: center;
-            background: linear-gradient(to bottom, #0a0a0a, #050505);
+            background: linear-gradient(to bottom, #ffffff, #f9f9f9);
         }
         .bi-header .module-badge {
             display: inline-block;
@@ -49,32 +50,32 @@
         }
         .bi-header h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; margin-bottom: 1rem; }
         .bi-header h1 span { color: var(--primary); }
-        .bi-header p { color: rgba(255,255,255,0.5); max-width: 600px; margin: 0 auto; font-size: 1rem; line-height: 1.8; }
+        .bi-header p { color: rgba(0,0,0,0.5); max-width: 600px; margin: 0 auto; font-size: 1rem; line-height: 1.8; }
 
         /* DASHBOARD FULL */
         .bi-dashboard {
             margin: 2rem 5% 0;
-            background: #0d0d0d;
-            border: 1px solid rgba(255,255,255,0.07);
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.07);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
         }
         .bi-dash-header {
-            background: #111; padding: 1rem 1.5rem;
+            background: #fdfdfd; padding: 1rem 1.5rem;
             display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid #1a1a1a;
+            border-bottom: 1px solid #f0f0f0;
         }
         .bi-dash-header h3 { font-size: 0.9rem; margin: 0; font-weight: 700; }
         .bi-period {
-            background: #1a1a1a; padding: 0.5rem 1.2rem;
-            border-radius: 100px; font-size: 0.75rem; color: #888;
-            border: 1px solid #252525;
+            background: #f5f5f5; padding: 0.5rem 1.2rem;
+            border-radius: 100px; font-size: 0.75rem; color: #666;
+            border: 1px solid #e5e5e5;
         }
         .bi-body { display: grid; grid-template-columns: 240px 1fr; }
         .bi-sidebar {
-            background: #0a0a0a; padding: 1.5rem;
-            border-right: 1px solid #151515;
+            background: #f9f9f9; padding: 1.5rem;
+            border-right: 1px solid #eeeeee;
             display: flex; flex-direction: column; gap: 0.3rem;
         }
         .bi-sidebar-logo { font-weight: 900; font-size: 1rem; color: var(--primary); text-align: center; margin-bottom: 2rem; letter-spacing: 2px; }
@@ -84,14 +85,15 @@
             cursor: pointer; transition: 0.3s; color: #555;
         }
         .bi-nav-item.active { background: rgba(212,175,55,0.1); color: var(--primary); }
-        .bi-nav-item:hover { background: rgba(255,255,255,0.03); color: #888; }
+        .bi-nav-item:hover { background: rgba(0,0,0,0.03); color: #666; }
         .bi-main { padding: 2rem; overflow-y: auto; }
 
         /* KPI CARDS */
         .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
         .kpi-card {
-            background: #111; border: 1px solid #1a1a1a; border-radius: 10px;
+            background: #ffffff; border: 1px solid #eeeeee; border-radius: 10px;
             padding: 1.2rem; position: relative; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
         .kpi-card::after {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
@@ -99,20 +101,20 @@
             transition: opacity 0.3s;
         }
         .kpi-card:hover::after { opacity: 1; }
-        .kpi-label { font-size: 0.65rem; color: #555; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.8rem; }
+        .kpi-label { font-size: 0.65rem; color: #888; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.8rem; }
         .kpi-value { font-size: 1.6rem; font-weight: 900; color: var(--primary); }
         .kpi-sub { font-size: 0.65rem; color: #27c93f; margin-top: 0.4rem; }
         .kpi-sub.warn { color: #ffbd2e; }
 
         /* CHART + ACQUISITION */
         .bi-charts { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1rem; margin-bottom: 2rem; }
-        .chart-box { background: #111; border: 1px solid #1a1a1a; border-radius: 10px; padding: 1.5rem; }
-        .chart-box h4 { font-size: 0.8rem; color: #888; margin-bottom: 1.5rem; }
+        .chart-box { background: #ffffff; border: 1px solid #eeeeee; border-radius: 10px; padding: 1.5rem; }
+        .chart-box h4 { font-size: 0.8rem; color: #555; margin-bottom: 1.5rem; }
         .chart-bars { display: flex; align-items: flex-end; gap: 8px; height: 160px; }
         .c-bar { flex: 1; border-radius: 4px 4px 0 0; background: rgba(212,175,55,0.15); border: 1px solid rgba(212,175,55,0.2); cursor: pointer; position: relative; transition: 0.3s; }
         .c-bar:hover { background: rgba(212,175,55,0.4); }
         .c-bar.peak { background: var(--primary); }
-        .c-bar .c-label { position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%); font-size: 0.55rem; color: #555; white-space: nowrap; }
+        .c-bar .c-label { position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%); font-size: 0.55rem; color: #888; white-space: nowrap; }
         .c-bar .c-tip { position: absolute; top: -24px; left: 50%; transform: translateX(-50%); font-size: 0.55rem; color: var(--primary); font-weight: 700; white-space: nowrap; }
         .c-legend { margin-top: 30px; display: flex; gap: 1rem; }
         .c-leg-item { display: flex; align-items: center; gap: 6px; font-size: 0.65rem; color: #555; }
@@ -122,37 +124,37 @@
         .acq-item { }
         .acq-header { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 6px; }
         .acq-header span:last-child { color: var(--primary); font-weight: 700; }
-        .acq-bar-bg { width: 100%; height: 5px; background: #1a1a1a; border-radius: 3px; }
+        .acq-bar-bg { width: 100%; height: 5px; background: #f0f0f0; border-radius: 3px; }
         .acq-bar-fill { height: 100%; background: var(--primary); border-radius: 3px; }
 
         /* TABLE */
-        .bi-table-section { background: #111; border: 1px solid #1a1a1a; border-radius: 10px; padding: 1.5rem; }
+        .bi-table-section { background: #ffffff; border: 1px solid #eeeeee; border-radius: 10px; padding: 1.5rem; }
         .bi-table-section h4 { font-size: 0.85rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
         .live-badge { font-size: 0.55rem; background: rgba(39,201,63,0.2); color: #27c93f; padding: 2px 8px; border-radius: 100px; font-weight: 800; letter-spacing: 2px; }
         .bi-table { width: 100%; border-collapse: collapse; }
-        .bi-table th { text-align: left; padding: 0.7rem 0.8rem; border-bottom: 1px solid #1a1a1a; color: #444; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; }
-        .bi-table td { padding: 0.9rem 0.8rem; border-bottom: 1px solid #151515; font-size: 0.8rem; }
+        .bi-table th { text-align: left; padding: 0.7rem 0.8rem; border-bottom: 1px solid #eeeeee; color: #888; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; }
+        .bi-table td { padding: 0.9rem 0.8rem; border-bottom: 1px solid #f9f9f9; font-size: 0.8rem; }
         .bi-table tr:last-child td { border: none; }
         .status-paid { color: #27c93f; font-weight: 700; font-size: 0.7rem; }
         .status-partial { color: #ffbd2e; font-weight: 700; font-size: 0.7rem; }
 
         /* WHAT SECTION */
-        .bi-what { padding: 5rem 5%; background: #030303; }
+        .bi-what { padding: 5rem 5%; background: #ffffff; }
         .bi-what-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
         .bi-what-text h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem; }
         .bi-what-text h2 span { color: var(--primary); }
-        .bi-what-text p { color: rgba(255,255,255,0.5); line-height: 1.8; margin-bottom: 2rem; }
+        .bi-what-text p { color: rgba(0,0,0,0.5); line-height: 1.8; margin-bottom: 2rem; }
         .bi-list { list-style: none; }
         .bi-list li { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; font-size: 0.9rem; }
         .bi-list li i { color: var(--primary); width: 16px; }
         .bi-side-stats { display: flex; flex-direction: column; gap: 1.5rem; }
         .bs-item { background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.15); border-radius: 10px; padding: 1.5rem; }
         .bs-item .num { font-size: 2rem; font-weight: 900; color: var(--primary); }
-        .bs-item .label { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 0.3rem; }
+        .bs-item .label { font-size: 0.75rem; color: rgba(0,0,0,0.4); margin-top: 0.3rem; }
 
-        .bi-cta { padding: 5rem 5%; text-align: center; background: #050505; border-top: 1px solid rgba(255,255,255,0.05); }
+        .bi-cta { padding: 5rem 5%; text-align: center; background: #fdfdfd; border-top: 1px solid rgba(0,0,0,0.05); }
         .bi-cta h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem; }
-        .bi-cta p { color: rgba(255,255,255,0.5); margin-bottom: 2.5rem; }
+        .bi-cta p { color: rgba(0,0,0,0.5); margin-bottom: 2.5rem; }
 
         @media (max-width: 1024px) {
             .bi-body { grid-template-columns: 1fr; }
